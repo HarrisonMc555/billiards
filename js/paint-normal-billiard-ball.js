@@ -1,6 +1,7 @@
 const paintCircle = require('./paint-circle');
 const MAX_SOLID_NUMBER;
 const STRIPED_BALL_BACKGROUND_COLOR = 'white';
+const LINE_CAP_STYLE = 'round';
 const NUMBER_TO_COLOR_MAP = {
   1: 'yellow',
   2: 'blue',
@@ -45,11 +46,13 @@ function paintStripedBilliardBall(ctx, ball) {
 }
 
 function paintBilliardBallStripe(ctx, circle, color) {
-  let lineRadius = circle.radius * lineWidthAsFractionOfRadius;
-  let distanceFromCenter = circle.radius - lineRadius;
+  let lineWidth = circle.radius * lineWidthAsFractionOfRadius;
+  let distanceFromCenter = circle.radius - lineWidth;
   /* Horizontal stripe */
-  ctx.beginPath();
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = 'round';
   ctx.strokeStyle(color);
+  ctx.beginPath();
   ctx.moveTo(circle.center.x - distanceFromCenter,
              circle.center.y);
   ctx.lineTo(circle.center.x + distanceFromCenter,
