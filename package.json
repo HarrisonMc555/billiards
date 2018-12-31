@@ -1,0 +1,11 @@
+{
+  "name": "billiards",
+  "version": "1.0.0",
+  "description": "Play billiards in a browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harrison McCullough",
+  "license": "ISC"
+}
