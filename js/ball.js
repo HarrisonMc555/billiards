@@ -10,6 +10,14 @@ class Ball {
     this.circle.move(this.velocity.x, this.velocity.y);
   }
 
+  get center() {
+    return this.circle.center;
+  }
+
+  get radius() {
+    return this.circle.radius;
+  }
+
 }
 
 module.exports = Ball;

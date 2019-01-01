@@ -9,6 +9,18 @@ class NormalBilliardBall {
     this.ball.tick();
   }
 
+  get circle() {
+    return this.ball.circle;
+  }
+
+  get center() {
+    return this.circle.center;
+  }
+
+  get radius() {
+    return this.circle.radius;
+  }
+
 }
 
 module.exports = NormalBilliardBall;
