@@ -1,7 +1,7 @@
-CueBall = require('./cue-ball');
-NormalBilliardBall = require('./normal-billiard-ball');
+const CueBall = require('./cue-ball');
+const NormalBilliardBall = require('./normal-billiard-ball');
 paintCueBall = require('./paint-cue-ball');
-paintNormalBilliardBall = require('paint-normal-billiard-ball');
+paintNormalBilliardBall = require('./paint-normal-billiard-ball');
 
 class BallPainter {
 
@@ -21,8 +21,8 @@ class BallPainter {
     }
   }
 
-  createDefault() {
-    return BallPainter(paintCueBall, paintNormalBilliardBall);
+  static createDefault() {
+    return new BallPainter(paintCueBall, paintNormalBilliardBall);
   }
 
 }

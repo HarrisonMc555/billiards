@@ -1,8 +1,14 @@
+const Defaults = require('./defaults');
+
 class Table {
 
-  constructor(walls, holes) {
-    this.walls = walls;
+  constructor(bounds, holes) {
+    this.bounds = bounds;
     this.holes = holes;
+  }
+
+  static createDefault() {
+    return new Table(Defaults.tableBounds, Defaults.holes);
   }
 
 }

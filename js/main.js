@@ -1,5 +1,42 @@
-const Point = require('./point.js');
+const Board = require('./board');
+const BoardPainter = require('./board-painter');
 
-let p1 = new Point(0, 0);
+var ctx;
+var ctx_loaded = false;
 
-console.log('point: ', p1);
+window.onload = run;
+
+function run() {
+  load_ctx();
+  if (!ctx_loaded) {
+    return;
+  }
+  draw();
+}
+
+function load_ctx() {
+  const canvas_name = 'billiards-canvas';
+  var canvas = document.getElementById(canvas_name);
+
+  if (!canvas) {
+    console.log('Canvas element "' + canvas_name + '" not found');
+  } else if (canvas.getContext) {
+    ctx = canvas.getContext('2d');
+    ctx_loaded = true;
+    console.log('success!');
+    console.log('ctx = ' + ctx);
+  } else {
+    console.log('HTML canvas is not supported.');
+  }
+}
+
+function draw() {
+  let board = Board.createDefault();
+
+  let boardPainter = BoardPainter.createDefault();
+  boardPainter.paintBoard(ctx, board);
+
+  console.log('board:', board);
+}
+
+let board = Board.createDefault();

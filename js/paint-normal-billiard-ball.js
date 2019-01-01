@@ -1,8 +1,9 @@
 const paintCircle = require('./paint-circle');
-const MAX_SOLID_NUMBER;
+
+const MAX_SOLID_NUMBER = 8;
 const STRIPED_BALL_BACKGROUND_COLOR = 'white';
 const LINE_CAP_STYLE = 'round';
-const NUMBER_TO_COLOR_MAP = {
+const NUMBER_TO_COLOR_MAP = Object.freeze({
   1: 'yellow',
   2: 'blue',
   3: 'red',
@@ -18,8 +19,7 @@ const NUMBER_TO_COLOR_MAP = {
   13: 'orange',
   14: 'green',
   15: 'tan',
-  16: 'black',
-};
+});
 const lineWidthAsFractionOfRadius = 0.5;
 
 function paintNormalBilliardBall(ctx, ball) {
@@ -31,7 +31,7 @@ function paintNormalBilliardBall(ctx, ball) {
 }
 
 function isSolidBilliardBall(ctx, ball) {
-  return ball.number <= 8;
+  return ball.number <= MAX_SOLID_NUMBER;
 }
 
 function paintSolidBilliardBall(ctx, ball) {

@@ -1,24 +1,23 @@
-paintWall = require('./paint-wall');
+paintTableTop = require('./paint-table-top');
 paintHole = require('./paint-hole');
 
 class TablePainter {
 
-  constructor(wallPainter, holePainter) {
-    this.wallPainter = wallPainter;
-    this.holePainter = holePainter;
+  constructor(tableTopPaintFunction, holePaintFunction) {
+    this.tableTopPaintFunction = tableTopPaintFunction;
+    this.holePaintFunction = holePaintFunction;
   }
 
   paintTable(ctx, table) {
-    table.walls.forEach(wall => {
-      this.wallPainter.paint(wall);
-    });
+    this.tableTopPaintFunction(ctx, table.bounds);
     table.holes.forEach(hole => {
-      this.holePainter.paint(hole);
+      console.log(hole);
+      this.holePaintFunction(ctx, hole);
     });
   }
 
-  createDefault() {
-    return TablePainter(paintWall, paintHole);
+  static createDefault() {
+    return new TablePainter(paintTableTop, paintHole);
   }
 
 }
