@@ -2,6 +2,7 @@ const CueBall = require('./cue-ball');
 const NormalBilliardBall = require('./normal-billiard-ball');
 paintCueBall = require('./paint-cue-ball');
 paintNormalBilliardBall = require('./paint-normal-billiard-ball');
+paintBall = require('./paint-ball');
 
 class BallPainter {
 
@@ -19,6 +20,7 @@ class BallPainter {
       throw 'Tried to draw something that wasn\'t a CueBall or ' +
         'NormalBilliardBall.';
     }
+    paintBall(ctx, ball);
   }
 
   static createDefault() {

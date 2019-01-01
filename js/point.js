@@ -24,6 +24,10 @@ class Point {
     this.y += dy;
   }
 
+  create_point_offset_by(dx, dy) {
+    return new Point(this.x + dx, this.y + dy);
+  }
+
 }
 
 module.exports = Point;
