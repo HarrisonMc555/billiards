@@ -10,29 +10,12 @@ const NormalBilliardBall = require('./normal-billiard-ball');
 
 /* Table Top */
 const TABLE_TOP_LEFT = new Point(0, 0);
-const TABLE_WIDTH = 200;
-const TABLE_HEIGHT = 100;
+const TABLE_WIDTH = 1000;
+const TABLE_HEIGHT = 500;
 const TABLE_BOUNDS = new Rectangle(TABLE_TOP_LEFT, TABLE_WIDTH, TABLE_HEIGHT);
 
-/* Hole */
-const HOLE_RADIUS = 10;
-const HOLES_DATA = [
-  [[0, 0], HoleDirection.TOP_LEFT],
-  [[0, TABLE_WIDTH / 2], HoleDirection.TOP_MIDDLE],
-  [[0, TABLE_WIDTH], HoleDirection.TOP_RIGHT],
-  [[TABLE_HEIGHT, 0], HoleDirection.BOTTOM_LEFT],
-  [[TABLE_HEIGHT, TABLE_WIDTH / 2], HoleDirection.BOTTOM_MIDDLE],
-  [[TABLE_HEIGHT, TABLE_WIDTH], HoleDirection.BOTTOM_RIGHT],
-];
-const HOLES = HOLES_DATA.map(data => {
-  let [[x, y], direction] = data;
-  let center = new Point(x, y);
-  let circle = new Circle(center, HOLE_RADIUS);
-  return new Hole(circle, direction);
-});
-
 /* Balls */
-const BALL_RADIUS = 6;
+const BALL_RADIUS = 20;
 const BALL_MASS = 1;
 const BALL_VELOCITY_X = 0;
 const BALL_VELOCITY_Y = 0;
@@ -91,6 +74,23 @@ const NORMAL_BILLIARD_BALLS = NORMAL_BILLIARD_BALLS_DATA.map(data => {
   let ball = new Ball(circle, NORMAL_BILLIARD_BALL_MASS, velocity);
   let normal_billiard_ball = new NormalBilliardBall(ball, number);
   return normal_billiard_ball;
+});
+
+/* Hole */
+const HOLE_RADIUS = BALL_RADIUS * 1.2;
+const HOLES_DATA = [
+  [HoleDirection.TOP_LEFT      ,[TABLE_WIDTH * 0 / 2, 0]],
+  [HoleDirection.TOP_MIDDLE    ,[TABLE_WIDTH * 1 / 2, 0]],
+  [HoleDirection.TOP_RIGHT     ,[TABLE_WIDTH * 2 / 2, 0]],
+  [HoleDirection.BOTTOM_LEFT   ,[TABLE_WIDTH * 0 / 2, TABLE_HEIGHT]],
+  [HoleDirection.BOTTOM_MIDDLE ,[TABLE_WIDTH * 1 / 2, TABLE_HEIGHT]],
+  [HoleDirection.BOTTOM_RIGHT  ,[TABLE_WIDTH * 2 / 2, TABLE_HEIGHT]],
+];
+const HOLES = HOLES_DATA.map(data => {
+  let [direction, [x, y]] = data;
+  let center = new Point(x, y);
+  let circle = new Circle(center, HOLE_RADIUS);
+  return new Hole(circle, direction);
 });
 
 /* All together now */

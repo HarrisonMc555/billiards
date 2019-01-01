@@ -9,7 +9,7 @@ const NUMBER_TO_COLOR_MAP = Object.freeze({
   3: 'red',
   4: 'pink',
   5: 'orange',
-  6: 'green',
+  6: 'lime',
   7: 'tan',
   8: 'black',
   9: 'yellow',
@@ -17,10 +17,10 @@ const NUMBER_TO_COLOR_MAP = Object.freeze({
   11: 'red',
   12: 'pink',
   13: 'orange',
-  14: 'green',
+  14: 'lime',
   15: 'tan',
 });
-const lineWidthAsFractionOfRadius = 0.5;
+const lineWidthAsFractionOfRadius = 0.55;
 
 function paintNormalBilliardBall(ctx, normalBilliardBall) {
   if (isSolidBilliardBall(normalBilliardBall)) {
@@ -47,8 +47,8 @@ function paintStripedBilliardBall(ctx, normalBilliardBall) {
 }
 
 function paintBilliardBallStripe(ctx, circle, color) {
-  let lineWidth = circle.radius * lineWidthAsFractionOfRadius;
-  let distanceFromCenter = circle.radius - lineWidth;
+  let lineWidth = 2 * (circle.radius * lineWidthAsFractionOfRadius);
+  let distanceFromCenter = circle.radius - (lineWidth / 2);
   /* Horizontal stripe */
   ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
