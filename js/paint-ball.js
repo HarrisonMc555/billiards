@@ -2,11 +2,11 @@ const Point = require('./point');
 const Circle = require('./circle');
 const PaintCircle = require('./paint-circle');
 
-const HIGHLIGHT_OFFSET_X_FRACTION = 0.35;
-const HIGHLIGHT_OFFSET_Y_FRACTION = -0.35;
+const HIGHLIGHT_OFFSET_X_FRACTION = 0.4;
+const HIGHLIGHT_OFFSET_Y_FRACTION = -0.4;
 const HIGHLIGHT_RADIUS_FRACTION = 0.15;
 const COLOR_STOPS = [
-  [0.0, 'rgba(255, 255, 255, 0.9)'],
+  [0.0, 'rgba(255, 255, 255, 0.7)'],
   [0.8, 'rgba(100, 100, 100, 0.1)'],
   [1.0, 'rgba( 50,  50,  50, 0.4)'],
 ];

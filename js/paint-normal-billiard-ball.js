@@ -99,8 +99,18 @@ function paintNumberCircle(ctx, normalBilliardBall) {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = NUMBER_CIRCLE_TEXT_COLOR;
+
+  /* Try transforming text... */
+  /* This works! */
+  // ctx.translate(normalBilliardBall.center.x, normalBilliardBall.center.y);
+  // ctx.scale(1, 0.5);
+  // ctx.translate(-normalBilliardBall.center.x, -normalBilliardBall.center.y);
+  // ctx.translate(0, normalBilliardBall.radius / 2);
+
   ctx.fillText(numberString, normalBilliardBall.center.x,
                normalBilliardBall.center.y);
+
+  // ctx.resetTransform();
 }
 
 module.exports = paintNormalBilliardBall;
