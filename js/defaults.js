@@ -32,7 +32,7 @@ const HOLES = HOLES_DATA.map(data => {
 });
 
 /* Balls */
-const BALL_RADIUS = 10;
+const BALL_RADIUS = 6;
 const BALL_MASS = 1;
 const BALL_VELOCITY_X = 0;
 const BALL_VELOCITY_Y = 0;

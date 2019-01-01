@@ -22,27 +22,28 @@ const NUMBER_TO_COLOR_MAP = Object.freeze({
 });
 const lineWidthAsFractionOfRadius = 0.5;
 
-function paintNormalBilliardBall(ctx, ball) {
-  if (isSolidBilliardBall(ball)) {
-    paintSolidBilliardBall(ctx, ball);
+function paintNormalBilliardBall(ctx, normalBilliardBall) {
+  if (isSolidBilliardBall(normalBilliardBall)) {
+    paintSolidBilliardBall(ctx, normalBilliardBall);
   } else {
-    paintStripedBilliardBall(ctx, ball);
+    paintStripedBilliardBall(ctx, normalBilliardBall);
   }
 }
 
-function isSolidBilliardBall(ctx, ball) {
-  return ball.number <= MAX_SOLID_NUMBER;
+function isSolidBilliardBall(normalBilliardBall) {
+  return normalBilliardBall.number <= MAX_SOLID_NUMBER;
 }
 
-function paintSolidBilliardBall(ctx, ball) {
-  let color = NUMBER_TO_COLOR_MAP[ball.number];
-  paintCircle(ctx, ball.circle, color);
+function paintSolidBilliardBall(ctx, normalBilliardBall) {
+  let color = NUMBER_TO_COLOR_MAP[normalBilliardBall.number];
+  paintCircle(ctx, normalBilliardBall.ball.circle, color);
 }
 
-function paintStripedBilliardBall(ctx, ball) {
-  paintCircle(ctx, ball.circle, STRIPED_BALL_BACKGROUND_COLOR);
-  let stripeColor = NUMBER_TO_COLOR_MAP[ball.number];
-  paintBilliardBallStripe(ctx, ball.circle, stripeColor);
+function paintStripedBilliardBall(ctx, normalBilliardBall) {
+  paintCircle(ctx, normalBilliardBall.ball.circle,
+              STRIPED_BALL_BACKGROUND_COLOR);
+  let stripeColor = NUMBER_TO_COLOR_MAP[normalBilliardBall.number];
+  paintBilliardBallStripe(ctx, normalBilliardBall.ball.circle, stripeColor);
 }
 
 function paintBilliardBallStripe(ctx, circle, color) {
@@ -51,7 +52,7 @@ function paintBilliardBallStripe(ctx, circle, color) {
   /* Horizontal stripe */
   ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
-  ctx.strokeStyle(color);
+  ctx.strokeStyle = color;
   ctx.beginPath();
   ctx.moveTo(circle.center.x - distanceFromCenter,
              circle.center.y);
