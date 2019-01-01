@@ -5,6 +5,10 @@ class NormalBilliardBall {
     this.number = number;
   }
 
+  tick() {
+    this.ball.tick();
+  }
+
 }
 
 module.exports = NormalBilliardBall;

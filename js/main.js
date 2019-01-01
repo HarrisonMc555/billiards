@@ -4,14 +4,22 @@ const BoardPainter = require('./board-painter');
 var ctx;
 var ctx_loaded = false;
 
+var board;
+var boardPainter;
+
 window.onload = run;
 
 function run() {
-  load_ctx();
+  setup();
   if (!ctx_loaded) {
     return;
   }
-  draw();
+  animate();
+}
+
+function setup() {
+  load_ctx();
+  init_board();
 }
 
 function load_ctx() {
@@ -30,13 +38,21 @@ function load_ctx() {
   }
 }
 
-function draw() {
-  let board = Board.createDefault();
-
-  let boardPainter = BoardPainter.createDefault();
-  boardPainter.paintBoard(ctx, board);
-
-  console.log('board:', board);
+function init_board() {
+  board = Board.createDefault();
+  boardPainter = BoardPainter.createDefault();
 }
 
-let board = Board.createDefault();
+function animate() {
+  tick();
+  draw();
+  setTimeout(animate, 20);
+}
+
+function tick() {
+  board.tick();
+}
+
+function draw() {
+  boardPainter.paintBoard(ctx, board);
+}

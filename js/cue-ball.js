@@ -4,6 +4,10 @@ class CueBall {
     this.ball = ball;
   }
 
+  tick() {
+    this.ball.tick();
+  }
+
 }
 
 module.exports = CueBall;

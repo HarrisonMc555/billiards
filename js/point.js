@@ -23,6 +23,7 @@ class Point {
     this.x += dx;
     this.y += dy;
   }
+
 }
 
 module.exports = Point;

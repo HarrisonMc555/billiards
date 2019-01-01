@@ -5,6 +5,10 @@ class Circle {
     this.radius = radius;
   }
 
+  move(dx, dy) {
+    this.center.move(dx, dy);
+  }
+
 }
 
 module.exports = Circle;

@@ -6,6 +6,10 @@ class Ball {
     this.velocity = velocity;
   }
 
+  tick() {
+    this.circle.move(this.velocity.x, this.velocity.y);
+  }
+
 }
 
 module.exports = Ball;

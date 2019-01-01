@@ -12,6 +12,10 @@ class Board {
     return this.balls.getAllBalls();
   }
 
+  tick() {
+    this.getAllBalls().forEach(ball => ball.tick());
+  }
+
   static createDefault() {
     return new Board(Table.createDefault(), BilliardBalls.createDefault());
   }
