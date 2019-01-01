@@ -20,7 +20,15 @@ const NUMBER_TO_COLOR_MAP = Object.freeze({
   14: 'lime',
   15: 'tan',
 });
-const lineWidthAsFractionOfRadius = 0.55;
+const LINE_WIDTH_AS_FRACTION_OF_RADIUS = 0.55;
+const ANGLE_OFFSET = 60 * Math.PI / 180;
+const TOP_ANGLE = 270 * Math.PI / 180;
+const BOTTOM_ANGLE = 90 * Math.PI / 180;
+const TOP_START_ANGLE = TOP_ANGLE - ANGLE_OFFSET;
+const TOP_END_ANGLE = TOP_ANGLE + ANGLE_OFFSET;
+const BOTTOM_START_ANGLE = BOTTOM_ANGLE - ANGLE_OFFSET;
+const BOTTOM_END_ANGLE = BOTTOM_ANGLE + ANGLE_OFFSET;
+const ANTICLOCKWISE = false;
 
 function paintNormalBilliardBall(ctx, normalBilliardBall) {
   if (isSolidBilliardBall(normalBilliardBall)) {
@@ -40,14 +48,27 @@ function paintSolidBilliardBall(ctx, normalBilliardBall) {
 }
 
 function paintStripedBilliardBall(ctx, normalBilliardBall) {
-  paintCircle(ctx, normalBilliardBall.ball.circle,
-              STRIPED_BALL_BACKGROUND_COLOR);
   let stripeColor = NUMBER_TO_COLOR_MAP[normalBilliardBall.number];
-  paintBilliardBallStripe(ctx, normalBilliardBall.ball.circle, stripeColor);
+  paintCircle(ctx, normalBilliardBall.ball.circle, stripeColor);
+  paintBilliardBallOutsideStripe(ctx, normalBilliardBall.ball.circle);
+}
+
+function paintBilliardBallOutsideStripe(ctx, circle) {
+  ctx.beginPath();
+  ctx.arc(circle.center.x, circle.center.y, circle.radius, TOP_START_ANGLE,
+          TOP_END_ANGLE, ANTICLOCKWISE);
+  ctx.fillStyle = STRIPED_BALL_BACKGROUND_COLOR;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(circle.center.x, circle.center.y, circle.radius, BOTTOM_START_ANGLE,
+          BOTTOM_END_ANGLE, ANTICLOCKWISE);
+  ctx.fillStyle = STRIPED_BALL_BACKGROUND_COLOR;
+  ctx.fill();
 }
 
 function paintBilliardBallStripe(ctx, circle, color) {
-  let lineWidth = 2 * (circle.radius * lineWidthAsFractionOfRadius);
+  let lineWidth = 2 * (circle.radius * LINE_WIDTH_AS_FRACTION_OF_RADIUS);
   let distanceFromCenter = circle.radius - (lineWidth / 2);
   /* Horizontal stripe */
   ctx.lineWidth = lineWidth;
