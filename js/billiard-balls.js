@@ -15,7 +15,8 @@ class BilliardBalls {
   }
 
   static createDefault() {
-    return new BilliardBalls(Defaults.cueBall, Defaults.normalBilliardBalls);
+    return new BilliardBalls(Defaults.createCueBall(),
+                             Defaults.createNormalBilliardBalls());
   }
 
 }

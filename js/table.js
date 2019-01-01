@@ -8,7 +8,7 @@ class Table {
   }
 
   static createDefault() {
-    return new Table(Defaults.tableBounds, Defaults.holes);
+    return new Table(Defaults.createTableBounds(), Defaults.createHoles());
   }
 
 }
