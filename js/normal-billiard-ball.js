@@ -5,10 +5,6 @@ class NormalBilliardBall {
     this.number = number;
   }
 
-  tick() {
-    this.ball.tick();
-  }
-
   get circle() {
     return this.ball.circle;
   }

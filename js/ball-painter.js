@@ -11,16 +11,21 @@ class BallPainter {
     this.paintNormalBilliardBallFunction = paintNormalBilliardBallFunction;
   }
 
-  paintBall(ctx, ball) {
-    if (ball instanceof CueBall) {
-      this.paintCueBallFunction(ctx, ball);
-    } else if (ball instanceof NormalBilliardBall) {
-      this.paintNormalBilliardBallFunction(ctx, ball);
-    } else {
-      throw 'Tried to draw something that wasn\'t a CueBall or ' +
-        'NormalBilliardBall.';
-    }
-    paintBall(ctx, ball);
+  paintBalls(ctx, balls) {
+    this.paintCueBall(ctx, balls.cueBall);
+    balls.normalBilliardBalls.forEach(
+      normalBilliardBall => this.paintNormalBilliardBall(
+        ctx, normalBilliardBall));
+  }
+
+  paintCueBall(ctx, cueBall) {
+    this.paintCueBallFunction(ctx, cueBall);
+    paintBall(ctx, cueBall.ball);
+  }
+
+  paintNormalBilliardBall(ctx, normalBilliardBall) {
+    this.paintNormalBilliardBallFunction(ctx, normalBilliardBall);
+    paintBall(ctx, normalBilliardBall.ball);
   }
 
   static createDefault() {

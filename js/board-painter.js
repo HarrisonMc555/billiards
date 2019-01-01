@@ -10,9 +10,7 @@ class BoardPainter {
 
   paintBoard(ctx, board) {
     this.tablePainter.paintTable(ctx, board.table);
-    board.getAllBalls().forEach(ball => {
-      this.ballPainter.paintBall(ctx, ball);
-    });
+    this.ballPainter.paintBalls(ctx, board.balls);
   }
 
   static createDefault() {

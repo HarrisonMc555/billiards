@@ -51,13 +51,13 @@ function isSolidBilliardBall(normalBilliardBall) {
 
 function paintSolidBilliardBall(ctx, normalBilliardBall) {
   let color = NUMBER_TO_COLOR_MAP[normalBilliardBall.number];
-  paintCircle(ctx, normalBilliardBall.ball.circle, color);
+  paintCircle(ctx, normalBilliardBall.circle, color);
 }
 
 function paintStripedBilliardBall(ctx, normalBilliardBall) {
   let stripeColor = NUMBER_TO_COLOR_MAP[normalBilliardBall.number];
-  paintCircle(ctx, normalBilliardBall.ball.circle, stripeColor);
-  paintBilliardBallOutsideStripe(ctx, normalBilliardBall.ball.circle);
+  paintCircle(ctx, normalBilliardBall.circle, stripeColor);
+  paintBilliardBallOutsideStripe(ctx, normalBilliardBall.circle);
 }
 
 function paintBilliardBallOutsideStripe(ctx, circle) {
