@@ -11,7 +11,6 @@ class TablePainter {
   paintTable(ctx, table) {
     this.tableTopPaintFunction(ctx, table.bounds);
     table.holes.forEach(hole => {
-      console.log(hole);
       this.holePaintFunction(ctx, hole);
     });
   }

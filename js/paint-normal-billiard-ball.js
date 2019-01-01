@@ -1,4 +1,5 @@
 const paintCircle = require('./paint-circle');
+const Circle = require('./circle');
 
 const MAX_SOLID_NUMBER = 8;
 const STRIPED_BALL_BACKGROUND_COLOR = 'white';
@@ -30,12 +31,18 @@ const BOTTOM_START_ANGLE = BOTTOM_ANGLE - ANGLE_OFFSET;
 const BOTTOM_END_ANGLE = BOTTOM_ANGLE + ANGLE_OFFSET;
 const ANTICLOCKWISE = false;
 
+const NUMBER_CIRCLE_RADIUS_FRACTION = 0.3;
+const NUMBER_CIRCLE_COLOR = 'white';
+const NUMBER_CIRCLE_TEXT_FONT = '9px sans-serif';
+const NUMBER_CIRCLE_TEXT_COLOR = 'black';
+
 function paintNormalBilliardBall(ctx, normalBilliardBall) {
   if (isSolidBilliardBall(normalBilliardBall)) {
     paintSolidBilliardBall(ctx, normalBilliardBall);
   } else {
     paintStripedBilliardBall(ctx, normalBilliardBall);
   }
+  paintNumberCircle(ctx, normalBilliardBall);
 }
 
 function isSolidBilliardBall(normalBilliardBall) {
@@ -80,6 +87,20 @@ function paintBilliardBallStripe(ctx, circle, color) {
   ctx.lineTo(circle.center.x + distanceFromCenter,
              circle.center.y);
   ctx.stroke();
+}
+
+function paintNumberCircle(ctx, normalBilliardBall) {
+  let radius = normalBilliardBall.radius * NUMBER_CIRCLE_RADIUS_FRACTION;
+  let numberCircle = new Circle(normalBilliardBall.center, radius);
+  paintCircle(ctx, numberCircle, NUMBER_CIRCLE_COLOR);
+
+  let numberString = '' + normalBilliardBall.number;
+  ctx.font = NUMBER_CIRCLE_TEXT_FONT;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = NUMBER_CIRCLE_TEXT_COLOR;
+  ctx.fillText(numberString, normalBilliardBall.center.x,
+               normalBilliardBall.center.y);
 }
 
 module.exports = paintNormalBilliardBall;
