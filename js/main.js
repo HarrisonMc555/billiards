@@ -46,7 +46,7 @@ function init_board() {
 function animate() {
   tick();
   draw();
-  setTimeout(animate, 20);
+  // setTimeout(animate, 20);
 }
 
 function tick() {

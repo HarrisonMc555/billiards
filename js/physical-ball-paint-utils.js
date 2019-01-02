@@ -11,18 +11,23 @@ const Circle = require('./circle');
 const PaintCircle = require('./paint-circle');
 
 const HIGHLIGHT_OFFSET_X_FRACTION = 0.4;
-const HIGHLIGHT_OFFSET_Y_FRACTION = -0.4;
+const HIGHLIGHT_OFFSET_Y_FRACTION = -0.3;
 const HIGHLIGHT_RADIUS_FRACTION = 0.15;
-const COLOR_STOPS = [
-  [0.0, 'rgba(255, 255, 255, 0.7)'],
-  [0.8, 'rgba(100, 100, 100, 0.1)'],
-  [1.0, 'rgba( 50,  50,  50, 0.4)'],
+const HIGHLIGHT_COLOR_STOPS = [
+  [0.00, 'rgba(255, 255, 255, 0.65)'],
+  [0.35, 'rgba(150, 150, 150, 0.4)'],
+  [0.70, 'rgba(150, 150, 150, 0.4)'],
+  [0.90, 'rgba(100, 100, 100, 0.4)'],
+  [1.00, 'rgba( 50,  50,  50, 0.4)'],
 ];
 
-const SHADOW_OFFSET_X_FRACTION = 0.2;
-const SHADOW_OFFSET_Y_FRACTION = 0.2;
-const SHADOW_RADIUS_FRACTION = 0.15;
-const SHADOW_COLOR = 'rgba(0, 0, 0.5)';
+const SHADOW_OFFSET_X_FRACTION = -0.4;
+const SHADOW_OFFSET_Y_FRACTION = 0.3;
+const SHADOW_RADIUS_FRACTION = 1.0;
+const SHADOW_COLOR_STOPS = [
+  [0.5, 'rgba(0, 0, 0, 0.2)'],
+  [1.0, 'rgba(0, 0, 0, 0.0)'],
+];
 
 
 /* Functions */
@@ -40,7 +45,7 @@ function paintPhysicalBallHighlights(ctx, physicalBall) {
     innerCircle.center.x, innerCircle.center.y, innerCircle.radius,
     outerCircle.center.x, outerCircle.center.y, outerCircle.radius);
 
-  COLOR_STOPS.forEach(colorStop => {
+  HIGHLIGHT_COLOR_STOPS.forEach(colorStop => {
     let [position, color] = colorStop;
     gradient.addColorStop(position, color);
   });
@@ -50,14 +55,28 @@ function paintPhysicalBallHighlights(ctx, physicalBall) {
 }
 
 function paintPhysicalBallShadow(ctx, physicalBall) {
-  let shadowXOffset = physicalBall.radius * HIGHLIGHT_OFFSET_X_FRACTION;
-  let shadowYOffset = physicalBall.radius * HIGHLIGHT_OFFSET_Y_FRACTION;
+  console.log('paintPhysicalBallShadow');
+  let shadowXOffset = physicalBall.radius * SHADOW_OFFSET_X_FRACTION;
+  let shadowYOffset = physicalBall.radius * SHADOW_OFFSET_Y_FRACTION;
   let shadowCenter = new Point(physicalBall.center.x + shadowXOffset,
-                                    physicalBall.center.y + shadowYOffset);
-  let shadowRadius = physicalBall.radius * HIGHLIGHT_RADIUS_FRACTION;
+                               physicalBall.center.y + shadowYOffset);
+  let shadowRadius = physicalBall.radius * SHADOW_RADIUS_FRACTION;
+  console.log('Ball:   radius = ' + physicalBall.radius +
+              ', center = ', physicalBall.center);
+  console.log('Shadow: radius = ' + shadowRadius + ', center = ', shadowCenter);
   let circle = new Circle(shadowCenter, shadowRadius);
 
-  paintCircle(ctx, circle, SHADOW_COLOR);
+  let gradient = ctx.createRadialGradient(
+    circle.center.x, circle.center.y, circle.radius / 2,
+    circle.center.x, circle.center.y, circle.radius);
+
+  SHADOW_COLOR_STOPS.forEach(colorStop => {
+    let [position, color] = colorStop;
+    gradient.addColorStop(position, color);
+  });
+
+  ctx.fillStyle = 'black';
+  paintCircle(ctx, circle, gradient);
 }
 
 module.exports = PhysicalBallPaintUtils;

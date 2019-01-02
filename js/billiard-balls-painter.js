@@ -9,22 +9,28 @@ class BilliardBallsPainter {
   }
 
   paintBilliardBalls(ctx, billiardBalls) {
-    this.paintCueBall(ctx, billiardBalls.cueBall);
+    this.paintShadows(ctx, billiardBalls);
+    this.paintActualBilliardBalls(ctx, billiardBalls);
+  }
+
+  paintShadows(ctx, billiardBalls) {
+    PhysicalBallPaintUtils.paintShadow(ctx, billiardBalls.cueBall.physicalBall);
     billiardBalls.normalBilliardBalls.forEach(
-      normalBilliardBall => this.paintNormalBilliardBall(
-        ctx, normalBilliardBall));
+      normalBilliardBall => PhysicalBallPaintUtils.paintShadow(
+        ctx, normalBilliardBall.physicalBall));
   }
 
-  paintCueBall(ctx, cueBall) {
-    PhysicalBallPaintUtils.paintShadow(ctx, cueBall.physicalBall);
-    this.paintCueBallFunction(ctx, cueBall);
-    PhysicalBallPaintUtils.paintHighlights(ctx, cueBall.physicalBall);
+  paintActualBilliardBalls(ctx, billiardBalls) {
+    this.paintBilliardBall(ctx, billiardBalls.cueBall,
+                           this.paintCueBallFunction);
+    billiardBalls.normalBilliardBalls.forEach(
+      normalBilliardBall => this.paintBilliardBall(
+        ctx, normalBilliardBall, this.paintNormalBilliardBallFunction));
   }
 
-  paintNormalBilliardBall(ctx, normalBilliardBall) {
-    PhysicalBallPaintUtils.paintShadow(ctx, normalBilliardBall.physicalBall);
-    this.paintNormalBilliardBallFunction(ctx, normalBilliardBall);
-    PhysicalBallPaintUtils.paintHighlights(ctx, normalBilliardBall.physicalBall);
+  paintBilliardBall(ctx, billiardBall, paintFunction) {
+    paintFunction(ctx, billiardBall);
+    PhysicalBallPaintUtils.paintHighlights(ctx, billiardBall.physicalBall);
   }
 
   static createDefault() {
