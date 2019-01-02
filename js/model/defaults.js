@@ -90,11 +90,11 @@ class Defaults {
     });
   }
 
-  static createHoleRadius() {
+  static getHoleRadius() {
     return HOLE_RADIUS;
   }
 
-  static createBallRadius() {
+  static getBallRadius() {
     return BALL_RADIUS;
   }
 

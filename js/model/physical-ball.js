@@ -13,7 +13,7 @@ class PhysicalBall {
   maybeCollideWithWall(wall) {
     if (this.collidesWithWall(wall)) {
       console.log(this, 'bouncing off', wall);
-      this.velocity = this.bounceOffWall(wall);
+      this.bounceOffWall(wall);
       return true;
     }
     return false;
@@ -34,9 +34,9 @@ class PhysicalBall {
   }
 
   maybeCollideWithPhysicalBall(physicalBall) {
-    if (this.collidesWithPhysicalBall(wall)) {
+    if (this.collidesWithPhysicalBall(physicalBall)) {
       console.log(this, 'bouncing off', physicalBall);
-      this.velocity = this.bounceOffPhysicalBall(wall);
+      this.bounceOffPhysicalBall(physicalBall);
       return true;
     }
     return false;
