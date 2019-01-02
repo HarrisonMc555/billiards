@@ -10,8 +10,8 @@ class BilliardBalls {
   getAllPhysicalBalls() {
     let balls = [];
     balls.push(this.cueBall.physicalBall);
-    this.normalBilliardBalls.forEach(normalBilliardBall =>
-                                     normalBilliardBall.physicalBall);
+    this.normalBilliardBalls.forEach(
+      normalBilliardBall => balls.push(normalBilliardBall.physicalBall));
     return balls;
   }
 
