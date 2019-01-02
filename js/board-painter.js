@@ -1,5 +1,5 @@
 TablePainter = require('./table-painter');
-BallPainter = require('./ball-painter');
+BilliardBallsPainter = require('./billiard-balls-painter');
 
 class BoardPainter {
 
@@ -10,12 +10,12 @@ class BoardPainter {
 
   paintBoard(ctx, board) {
     this.tablePainter.paintTable(ctx, board.table);
-    this.ballPainter.paintBalls(ctx, board.balls);
+    this.ballPainter.paintBilliardBalls(ctx, board.billiardBalls);
   }
 
   static createDefault() {
     return new BoardPainter(TablePainter.createDefault(),
-                            BallPainter.createDefault());
+                            BilliardBallsPainter.createDefault());
   }
 
 }

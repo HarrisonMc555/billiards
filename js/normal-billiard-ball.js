@@ -1,12 +1,12 @@
 class NormalBilliardBall {
 
-  constructor(ball, number) {
-    this.ball = ball;
+  constructor(physicalBall, number) {
+    this.physicalBall = physicalBall;
     this.number = number;
   }
 
   get circle() {
-    return this.ball.circle;
+    return this.physicalBall.circle;
   }
 
   get center() {

@@ -1,4 +1,4 @@
-class Ball {
+class PhysicalBall {
 
   constructor(circle, mass, velocity) {
     this.circle = circle;
@@ -20,4 +20,4 @@ class Ball {
 
 }
 
-module.exports = Ball;
+module.exports = PhysicalBall;

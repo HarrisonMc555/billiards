@@ -3,17 +3,29 @@ BilliardBalls = require('./billiard-balls');
 
 class Board {
 
-  constructor(table, balls) {
+  constructor(table, billiardBalls) {
     this.table = table;
-    this.balls = balls;
+    this.billiardBalls = billiardBalls;
   }
 
-  getAllBalls() {
-    return this.balls.getAllBalls();
+  getAllPhysicalBalls() {
+    return this.billiardBalls.getAllPhysicalBalls();
   }
 
   tick() {
-    this.getAllBalls().forEach(ball => ball.tick());
+    this.moveAllPhysicalBalls();
+  }
+
+  moveAllPhysicalBalls() {
+    this.billiardBalls.getAllPhysicalBalls().forEach(
+      (physicalBall, index, array) => {
+      let otherBalls = array.slice(index + 1);
+      this.moveBall(physicalBall, otherBalls);
+    });
+  }
+
+  moveBall(physicalBall, otherBalls) {
+    // TODO
   }
 
   static createDefault() {
