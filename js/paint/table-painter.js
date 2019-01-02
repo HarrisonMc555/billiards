@@ -10,9 +10,8 @@ class TablePainter {
 
   paintTable(ctx, table) {
     this.tableTopPaintFunction(ctx, table.bounds);
-    table.holes.forEach(hole => {
-      this.holePaintFunction(ctx, hole);
-    });
+    table.holes.forEach(
+      hole => this.holePaintFunction(ctx, hole));
   }
 
   static createDefault() {
