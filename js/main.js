@@ -1,5 +1,5 @@
-const Board = require('./board');
-const BoardPainter = require('./board-painter');
+const Board = require('./model/board');
+const BoardPainter = require('./paint/board-painter');
 
 var ctx;
 var ctx_loaded = false;

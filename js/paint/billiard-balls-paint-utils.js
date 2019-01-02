@@ -1,5 +1,5 @@
 const paintCircle = require('./paint-circle');
-const Circle = require('./circle');
+const Circle = require('../model/circle');
 
 /* Utils */
 const BilliardBallsPaintUtils = {

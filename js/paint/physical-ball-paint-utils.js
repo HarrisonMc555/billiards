@@ -6,8 +6,8 @@ const PhysicalBallPaintUtils = {
 
 
 /* Constants */
-const Point = require('./point');
-const Circle = require('./circle');
+const Point = require('../model/point');
+const Circle = require('../model/circle');
 const PaintCircle = require('./paint-circle');
 
 const HIGHLIGHT_OFFSET_X_FRACTION = 0.4;
