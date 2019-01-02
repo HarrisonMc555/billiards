@@ -1,11 +1,11 @@
 const Board = require('./model/board');
 const BoardPainter = require('./paint/board-painter');
 
-var ctx;
-var ctx_loaded = false;
+let ctx;
+let ctx_loaded = false;
 
-var board;
-var boardPainter;
+let board;
+let boardPainter;
 
 window.onload = run;
 
@@ -14,6 +14,7 @@ function run() {
   if (!ctx_loaded) {
     return;
   }
+  console.log(board);
   animate();
 }
 
@@ -24,7 +25,7 @@ function setup() {
 
 function load_ctx() {
   const canvas_name = 'billiards-canvas';
-  var canvas = document.getElementById(canvas_name);
+  let canvas = document.getElementById(canvas_name);
 
   if (!canvas) {
     console.log('Canvas element "' + canvas_name + '" not found');
@@ -46,7 +47,7 @@ function init_board() {
 function animate() {
   tick();
   draw();
-  // setTimeout(animate, 20);
+  setTimeout(animate, 20);
 }
 
 function tick() {
