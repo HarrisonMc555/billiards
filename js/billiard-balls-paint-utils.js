@@ -121,8 +121,11 @@ function paintNumberCircle(ctx, normalBilliardBall) {
   // ctx.translate(-normalBilliardBall.center.x, -normalBilliardBall.center.y);
   // ctx.translate(0, normalBilliardBall.radius / 2);
 
-  ctx.fillText(numberString, normalBilliardBall.center.x,
-               normalBilliardBall.center.y);
+  /* Hack since text isn't exactly centered */
+  let x = normalBilliardBall.center.x;
+  let y = normalBilliardBall.center.y + radius*0.1;
+
+  ctx.fillText(numberString, x, y);
 
   // ctx.resetTransform();
 }
