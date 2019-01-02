@@ -79,6 +79,18 @@ class PhysicalBall {
     return this.velocity.getMagnitudeSquared() != 0;
   }
 
+  roundVelocity(roundingFactor) {
+    this.velocity.round(roundingFactor);
+  }
+
+  roundPosition(roundingFactor) {
+    this.center.round(roundingFactor);
+  }
+
+  stopIfReallySlow(minSpeed) {
+    this.velocity.stopIfReallySlow(minSpeed);
+  }
+
   get center() {
     return this.circle.center;
   }

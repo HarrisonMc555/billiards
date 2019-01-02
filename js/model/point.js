@@ -51,6 +51,11 @@ class Point {
     return MathUtil.atan2positive(dy, dx);
   }
 
+  round(roundingFactor) {
+    this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
+    this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
+  }
+
 }
 
 module.exports = Point;

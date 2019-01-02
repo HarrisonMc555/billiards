@@ -27,6 +27,23 @@ class Velocity {
     return MathUtil.atan2positive(this.y, this.x);
   }
 
+  round(roundingFactor) {
+    this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
+    this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
+  }
+
+  stopIfReallySlow(minSpeed) {
+    let minSpeedSquared = minSpeed * minSpeed;
+    if (this.getMagnitudeSquared() < minSpeedSquared) {
+      this.stop();
+    }
+  }
+
+  stop() {
+    this.x = 0;
+    this.y = 0;
+  }
+
 }
 
 module.exports = Velocity;
