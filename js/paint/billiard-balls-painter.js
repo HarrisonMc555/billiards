@@ -1,5 +1,6 @@
 const PhysicalBallPaintUtils = require('./physical-ball-paint-utils');
 const BilliardBallsPaintUtils = require('./billiard-balls-paint-utils');
+const PaintUtil = require('./paint-util');
 
 class BilliardBallsPainter {
 
@@ -14,7 +15,8 @@ class BilliardBallsPainter {
   }
 
   paintShadows(ctx, billiardBalls) {
-    PhysicalBallPaintUtils.paintShadow(ctx, billiardBalls.cueBall.physicalBall);
+    PhysicalBallPaintUtils.paintShadow(ctx,
+                                       billiardBalls.cueBall.physicalBall);
     billiardBalls.normalBilliardBalls.forEach(
       normalBilliardBall => PhysicalBallPaintUtils.paintShadow(
         ctx, normalBilliardBall.physicalBall));
@@ -31,6 +33,7 @@ class BilliardBallsPainter {
   paintBilliardBall(ctx, billiardBall, paintFunction) {
     paintFunction(ctx, billiardBall);
     PhysicalBallPaintUtils.paintHighlights(ctx, billiardBall.physicalBall);
+    PaintUtil.paintVelocity(billiardBall.physicalBall);
   }
 
   static createDefault() {

@@ -7,8 +7,11 @@ const mod = (x, n) => (x % n + n) % n;
 
 const FULL_CIRCLE = 2 * Math.PI;
 const HALF_CIRCLE = Math.PI;
+const QUARTER_CIRCLE = Math.PI / 2;
 
 const oppositeAngle = (angle) => mod(angle + HALF_CIRCLE, FULL_CIRCLE);
+
+const rightAngleTo = (angle) => mod(angle + QUARTER_CIRCLE, FULL_CIRCLE);
 
 const atan2positive = (num, den) => mod(Math.atan2(num, den), FULL_CIRCLE);
 
