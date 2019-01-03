@@ -1,3 +1,5 @@
+'use strict';
+
 MathUtil = require('../util/math-util');
 
 class Velocity {

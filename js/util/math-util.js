@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Computes x mod n
  * x arbitrary integer

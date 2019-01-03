@@ -1,3 +1,5 @@
+'use strict';
+
 const Defaults = require('./defaults');
 
 class BilliardBalls {

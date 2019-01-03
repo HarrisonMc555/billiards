@@ -1,3 +1,5 @@
+'use strict';
+
 const Velocity = require('./velocity');
 const AxisDirection = require('./axis-direction');
 const MathUtil = require('../util/math-util');

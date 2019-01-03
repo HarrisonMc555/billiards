@@ -1,3 +1,5 @@
+'use strict';
+
 const MathUtil = require('../util/math-util');
 
 const PaintUtil = Object.freeze({

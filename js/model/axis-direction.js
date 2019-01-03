@@ -1,3 +1,5 @@
+'use strict';
+
 const AxisDirection = Object.freeze({
   RIGHT: 0,
   DOWN: 1,

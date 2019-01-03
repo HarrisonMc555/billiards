@@ -1,3 +1,5 @@
+'use strict';
+
 class AxisAlignedLine {
 
   constructor(corner, direction, length) {

@@ -1,3 +1,5 @@
+'use strict';
+
 const PhysicalBallPaintUtils = require('./physical-ball-paint-utils');
 const BilliardBallsPaintUtils = require('./billiard-balls-paint-utils');
 const PaintUtil = require('./paint-util');

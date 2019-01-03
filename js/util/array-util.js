@@ -1,3 +1,5 @@
+'use strict';
+
 const someTruthy = (arr) => arr.some(x => x);
 
 const empty = (arr) => arr.length === 0;

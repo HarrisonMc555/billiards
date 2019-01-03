@@ -1,3 +1,5 @@
+'use strict';
+
 paintTableTop = require('./paint-table-top');
 paintHole = require('./paint-hole');
 

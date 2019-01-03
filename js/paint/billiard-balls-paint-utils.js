@@ -1,3 +1,5 @@
+'use strict';
+
 const paintCircle = require('./paint-circle');
 const Circle = require('../model/circle');
 

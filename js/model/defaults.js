@@ -1,3 +1,5 @@
+'use strict';
+
 const Point = require('./point');
 const Circle = require('./circle');
 const Rectangle = require('./rectangle');

@@ -1,3 +1,5 @@
+'use strict';
+
 const ArrayUtil = require('../util/array-util');
 const SetUtil = require('../util/set-util');
 

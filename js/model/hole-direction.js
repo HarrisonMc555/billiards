@@ -1,3 +1,5 @@
+'use strict';
+
 const HoleDirection = Object.freeze({
   TOP_LEFT: 0,
   TOP_MIDDLE: 0,

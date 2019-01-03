@@ -1,3 +1,5 @@
+'use strict';
+
 const Table = require('./table');
 const BilliardBalls = require('./billiard-balls');
 const ArrayUtil = require('../util/array-util');

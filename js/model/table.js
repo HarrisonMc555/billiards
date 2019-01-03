@@ -1,3 +1,5 @@
+'use strict';
+
 const Defaults = require('./defaults');
 const AxisAlignedLine = require('./axis-aligned-line');
 const AxisDirection = require('./axis-direction');

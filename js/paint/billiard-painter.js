@@ -1,3 +1,5 @@
+'use strict';
+
 const FULL_CIRCLE_RADIANS = 2 * Math.PI;
 const START_ANGLE = 0;
 const END_ANGLE = FULL_CIRCLE_RADIANS;

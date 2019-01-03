@@ -1,3 +1,5 @@
+'use strict';
+
 const TABLE_TOP_COLOR = require('./table-top-color');
 
 function paintTableTop(ctx, bounds) {

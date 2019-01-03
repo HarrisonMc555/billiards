@@ -1,3 +1,5 @@
+'use strict';
+
 class CueBall {
 
   constructor(physicalBall) {

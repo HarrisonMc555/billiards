@@ -1,3 +1,5 @@
+'use strict';
+
 class Circle {
 
   constructor(center, radius) {

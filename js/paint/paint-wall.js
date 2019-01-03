@@ -1,3 +1,5 @@
+'use strict';
+
 const WALL_COLOR = 'green';
 const LINE_WIDTH = 1;
 

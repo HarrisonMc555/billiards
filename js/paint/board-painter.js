@@ -1,3 +1,5 @@
+'use strict';
+
 TablePainter = require('./table-painter');
 BilliardBallsPainter = require('./billiard-balls-painter');
 
