@@ -11,7 +11,7 @@ class PhysicalBall {
   }
 
   maybeCollideWithWall(wall) {
-    if (this.collidesWithWall(wall)) {
+    if (this.willCollideWithWall(wall)) {
       console.log(this, 'bouncing off', wall);
       this.bounceOffWall(wall);
       return true;
@@ -19,8 +19,15 @@ class PhysicalBall {
     return false;
   }
 
-  collidesWithWall(wall) {
-    return this.circle.collidesWithAxisAlignedLine(wall);
+  willCollideWithWall(wall) {
+    let nextCircle = this.getNextCircle();
+    return nextCircle.collidesWithAxisAlignedLine(wall);
+  }
+
+  getNextCircle() {
+    let circle = this.circle.clone();
+    circle.move(this.velocity.x, this.velocity.y);
+    return circle;
   }
 
   bounceOffWall(wall) {
@@ -34,11 +41,18 @@ class PhysicalBall {
   }
 
   maybeCollideWithPhysicalBall(physicalBall) {
-    if (this.collidesWithPhysicalBall(physicalBall)) {
-      console.log(this, 'bouncing off', physicalBall);
+    let thisNextCircle = this.getNextCircle();
+    let otherNextCircle = physicalBall.getNextCircle();
+    if (thisNextCircle.collidesWithCircle(otherNextCircle)) {
+      console.log('bouncing off ball:', this, physicalBall);
       this.bounceOffPhysicalBall(physicalBall);
       return true;
     }
+    // if (this.collidesWithPhysicalBall(physicalBall)) {
+    //   console.log(this, 'bouncing off', physicalBall);
+    //   this.bounceOffPhysicalBall(physicalBall);
+    //   return true;
+    // }
     return false;
   }
 
@@ -88,6 +102,10 @@ class PhysicalBall {
 
     this.velocity = new Velocity(v1fx, v1fy);
     physicalBall.velocity = new Velocity(v2fx, v2fy);
+  }
+
+  move() {
+    this.circle.move(this.velocity.x, this.velocity.y);
   }
 
   moving() {

@@ -1,6 +1,8 @@
 const Table = require('./table');
 const BilliardBalls = require('./billiard-balls');
 const ArrayUtil = require('../util/array-util');
+const SetUtil = require('../util/set-util');
+const CollisionManager = require('./collision-manager');
 
 const COLLISION_SLOWDOWN_REDUCE_FACTOR = 0.1;
 const COLLISION_SLOWDOWN_FACTOR = 1 - COLLISION_SLOWDOWN_REDUCE_FACTOR;
@@ -37,31 +39,45 @@ class Board {
   }
 
   moveAllPhysicalBalls() {
-    this.updateVelocities();
-    this.updatePositions();
+    let collidedBalls = this.updateVelocities();
+    this.updatePositions(collidedBalls);
     this.roundValues();
     /* With just rounding, we'll never get to zero */
     this.stopReallySlowBalls();
   }
 
   updateVelocities() {
+    let walls = this.table.getWalls();
     let allPhyiscalBalls = this.billiardBalls.getAllPhysicalBalls();
-    let collidedArray = allPhyiscalBalls.map(
-      (physicalBall, index, array) => {
-        let otherPhysicalBalls = array.slice(index + 1);
-        return this.updateVelocityFromCollisions(physicalBall,
-                                                 otherPhysicalBalls);
-        // let otherPhysicalBalls = array.filter(
-        //   otherPhysicalBall => otherPhysicalBall !== physicalBall);
-        // return this.updateVelocityFromCollisions(physicalBall,
-        //                                          otherPhysicalBalls);
-      });
-    collidedArray.forEach((collided, index) => {
-      if (collided) {
-        this.applyCollisionSlowdown(allPhyiscalBalls[index]);
-      }
-    });
+    let collisionManager = new CollisionManager(walls, allPhyiscalBalls);
+    let numberOfCollisions = collisionManager.doAllCollisions();
+    numberOfCollisions.forEach(
+      ([ball, numCollisions]) => this.applyCollisionSlowdown(ball,
+                                                             numCollisions));
+
+    // let collidedArray = allPhyiscalBalls.map(
+    //   (physicalBall, index, array) => {
+    //     let otherPhysicalBalls = array.slice(index + 1);
+    //     return this.updateVelocityFromCollisions(physicalBall,
+    //                                              otherPhysicalBalls);
+    //     // let otherPhysicalBalls = array.filter(
+    //     //   otherPhysicalBall => otherPhysicalBall !== physicalBall);
+    //     // return this.updateVelocityFromCollisions(physicalBall,
+    //     //                                          otherPhysicalBalls);
+    //   });
+    // collidedArray.forEach((collided, index) => {
+    //   if (collided) {
+    //     this.applyCollisionSlowdown(allPhyiscalBalls[index]);
+    //   }
+    // });
     allPhyiscalBalls.forEach(physicalBall => this.applyFriction(physicalBall));
+    let collidedBallsArray = numberOfCollisions.map(entry => {
+      let [ball, numCollisions] = entry;
+      return ball;
+    });
+    let collidedBallsSet = new Set();
+    SetUtil.extend(collidedBallsSet, collidedBallsArray);
+    return collidedBallsSet;
   }
 
   updateVelocityFromCollisions(physicalBall, otherPhysicalBalls) {
@@ -84,17 +100,21 @@ class Board {
     return ArrayUtil.someTruthy(collidedArray);
   }
 
-  applyCollisionSlowdown(physicalBall) {
-    physicalBall.velocity.scale(COLLISION_SLOWDOWN_FACTOR);
+  applyCollisionSlowdown(physicalBall, numCollisions) {
+    physicalBall.velocity.scale(COLLISION_SLOWDOWN_FACTOR * numCollisions);
   }
 
   applyFriction(physicalBall) {
     physicalBall.velocity.scale(FRICTION_FACTOR);
   }
 
-  updatePositions() {
+  updatePositions(collidedBalls) {
     let allPhysicalBalls = this.billiardBalls.getAllPhysicalBalls();
-    allPhysicalBalls.forEach(physicalBall =>
+    let nonCollidedBalls = allPhysicalBalls.filter(
+      ball => !collidedBalls.has(ball));
+    // allPhysicalBalls.forEach(physicalBall =>
+    //                          this.updatePosition(physicalBall));
+    nonCollidedBalls.forEach(physicalBall =>
                              this.updatePosition(physicalBall));
   }
 

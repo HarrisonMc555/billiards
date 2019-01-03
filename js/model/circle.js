@@ -28,6 +28,12 @@ class Circle {
     return this.radius * this.radius;
   }
 
+  clone() {
+    let center = this.center.clone();
+    let circle = new Circle(center, this.radius);
+    return circle;
+  }
+
 }
 
 module.exports = Circle;

@@ -56,6 +56,10 @@ class Point {
     this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
   }
 
+  clone() {
+    return new Point(this.x, this.y);
+  }
+
 }
 
 module.exports = Point;
