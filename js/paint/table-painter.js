@@ -1,7 +1,7 @@
 'use strict';
 
-paintTableTop = require('./paint-table-top');
-paintHole = require('./paint-hole');
+const paintTableTop = require('./paint-table-top');
+const paintHole = require('./paint-hole');
 
 class TablePainter {
 

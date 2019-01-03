@@ -1,7 +1,7 @@
 'use strict';
 
 const Circle = require('../model/circle');
-paintCircle = require('./paint-circle');
+const paintCircle = require('./paint-circle');
 
 const TABLE_TOP_COLOR = require('./table-top-color');
 const HOLE_COLOR = 'black';

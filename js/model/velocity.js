@@ -1,6 +1,6 @@
 'use strict';
 
-MathUtil = require('../util/math-util');
+const MathUtil = require('../util/math-util');
 
 class Velocity {
 

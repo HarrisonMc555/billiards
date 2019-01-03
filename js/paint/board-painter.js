@@ -1,7 +1,7 @@
 'use strict';
 
-TablePainter = require('./table-painter');
-BilliardBallsPainter = require('./billiard-balls-painter');
+const TablePainter = require('./table-painter');
+const BilliardBallsPainter = require('./billiard-balls-painter');
 
 class BoardPainter {
 
