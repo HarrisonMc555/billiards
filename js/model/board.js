@@ -51,6 +51,10 @@ class Board {
         let otherPhysicalBalls = array.slice(index + 1);
         return this.updateVelocityFromCollisions(physicalBall,
                                                  otherPhysicalBalls);
+        // let otherPhysicalBalls = array.filter(
+        //   otherPhysicalBall => otherPhysicalBall !== physicalBall);
+        // return this.updateVelocityFromCollisions(physicalBall,
+        //                                          otherPhysicalBalls);
       });
     collidedArray.forEach((collided, index) => {
       if (collided) {

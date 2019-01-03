@@ -63,13 +63,28 @@ class PhysicalBall {
     // let theta2 = ball2.center.angleTo(ball1.center);
     let theta2 = MathUtil.oppositeAngle(theta1);
 
-    let deltaV1 = (2 * m2 * (v2i - v1i)) / (m1 + m2);
-    let deltaV2 = (2 * m1 * (v1i - v2i)) / (m2 + m1);
+    let deltaV1 = (2 * m2 * Math.abs(v1i - v2i)) / (m1 + m2);
+    let deltaV2 = (2 * m1 * Math.abs(v2i - v1i)) / (m1 + m2);
 
-    let v1fx = v1ix + deltaV1*Math.cos(theta1);
-    let v1fy = v1iy + deltaV1*Math.sin(theta1);
-    let v2fx = v2ix + deltaV2*Math.cos(theta2);
-    let v2fy = v2iy + deltaV2*Math.sin(theta2);
+    let deltaX = ball2.center.x - ball1.center.x;
+    let deltaV1x;
+    let deltaV1y;
+    if (deltaX === 0) {
+      deltaV1x = 0;
+      deltaV1y = (m1 - m2)/(m1 + m2) * v1iy +
+        2*m1/(m1 + m2) * v2iy;
+    } else {
+      deltaV1x = 2*m2*(v2ix - v1ix + Math.tan(theta1)*(v2iy - v1iy)) /
+          ((1/Math.cos(theta1))^2 * (m1 + m2));
+      deltaV1y = deltaV1x * Math.tan(theta1);
+    }
+    let deltaV2x = -m1/m2*deltaV1x;
+    let deltaV2y = -m1/m2*deltaV1y;
+
+    let v1fx = v1ix - deltaV1*Math.cos(theta1);
+    let v1fy = v1iy - deltaV1*Math.sin(theta1);
+    let v2fx = v2ix - deltaV2*Math.cos(theta2);
+    let v2fy = v2iy - deltaV2*Math.sin(theta2);
 
     this.velocity = new Velocity(v1fx, v1fy);
     physicalBall.velocity = new Velocity(v2fx, v2fy);
