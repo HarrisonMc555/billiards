@@ -29,8 +29,10 @@ const CUE_BALL_RADIUS = BALL_RADIUS;
 const CUE_BALL_MASS = BALL_MASS;
 // const CUE_BALL_VELOCITY_X = BALL_VELOCITY_X;
 // const CUE_BALL_VELOCITY_Y = BALL_VELOCITY_Y;
-const CUE_BALL_VELOCITY_X = 10;
-const CUE_BALL_VELOCITY_Y = 0.5;
+const CUE_BALL_VELOCITY_X = 25;
+const CUE_BALL_VELOCITY_Y = 0.4;
+// const CUE_BALL_VELOCITY_X = 2;
+// const CUE_BALL_VELOCITY_Y = 12;
 
 /* Normal Billiard Balls */
 const DEGREES_OFFSET_IN_FORMATION = 30;
@@ -52,18 +54,18 @@ const NORMAL_BILLIARD_BALLS_DATA = [
 
   [ 3, [RACK_X + 2*X_OFFSET, RACK_Y + 2*Y_OFFSET]],
   [ 8, [RACK_X + 2*X_OFFSET, RACK_Y + 0*Y_OFFSET]],
-  [ 2, [RACK_X + 2*X_OFFSET, RACK_Y - 2*Y_OFFSET]],
+  // [ 2, [RACK_X + 2*X_OFFSET, RACK_Y - 2*Y_OFFSET]],
 
-  [13, [RACK_X + 3*X_OFFSET, RACK_Y + 3*Y_OFFSET]],
-  [12, [RACK_X + 3*X_OFFSET, RACK_Y + 1*Y_OFFSET]],
-  [ 4, [RACK_X + 3*X_OFFSET, RACK_Y - 1*Y_OFFSET]],
-  [11, [RACK_X + 3*X_OFFSET, RACK_Y - 3*Y_OFFSET]],
+  // [13, [RACK_X + 3*X_OFFSET, RACK_Y + 3*Y_OFFSET]],
+  // [12, [RACK_X + 3*X_OFFSET, RACK_Y + 1*Y_OFFSET]],
+  // [ 4, [RACK_X + 3*X_OFFSET, RACK_Y - 1*Y_OFFSET]],
+  // [11, [RACK_X + 3*X_OFFSET, RACK_Y - 3*Y_OFFSET]],
 
-  [ 7, [RACK_X + 4*X_OFFSET, RACK_Y + 4*Y_OFFSET]],
-  [15, [RACK_X + 4*X_OFFSET, RACK_Y + 2*Y_OFFSET]],
-  [ 6, [RACK_X + 4*X_OFFSET, RACK_Y + 0*Y_OFFSET]],
-  [14, [RACK_X + 4*X_OFFSET, RACK_Y - 2*Y_OFFSET]],
-  [ 5, [RACK_X + 4*X_OFFSET, RACK_Y - 4*Y_OFFSET]],
+  // [ 7, [RACK_X + 4*X_OFFSET, RACK_Y + 4*Y_OFFSET]],
+  // [15, [RACK_X + 4*X_OFFSET, RACK_Y + 2*Y_OFFSET]],
+  // [ 6, [RACK_X + 4*X_OFFSET, RACK_Y + 0*Y_OFFSET]],
+  // [14, [RACK_X + 4*X_OFFSET, RACK_Y - 2*Y_OFFSET]],
+  // [ 5, [RACK_X + 4*X_OFFSET, RACK_Y - 4*Y_OFFSET]],
 ];
 
 /* Hole */
@@ -76,6 +78,9 @@ const HOLES_DATA = [
   [HoleDirection.BOTTOM_MIDDLE ,[TABLE_WIDTH * 1 / 2, TABLE_HEIGHT]],
   [HoleDirection.BOTTOM_RIGHT  ,[TABLE_WIDTH * 2 / 2, TABLE_HEIGHT]],
 ];
+
+/* Miscellaneous */
+const COLLISION_LEEWAY = 0.01;
 
 /* All together now */
 class Defaults {
@@ -104,7 +109,8 @@ class Defaults {
 
   static createCueBall() {
     let center = new Point(CUE_BALL_X, CUE_BALL_Y);
-    let circle = new Circle(center, CUE_BALL_RADIUS);
+    // let circle = new Circle(center, CUE_BALL_RADIUS);
+    let circle = new Circle(center, CUE_BALL_RADIUS * 0.99);
     let velocity = new Velocity(CUE_BALL_VELOCITY_X, CUE_BALL_VELOCITY_Y);
     let physicalBall = new PhysicalBall(circle, CUE_BALL_MASS, velocity);
     return new CueBall(physicalBall);
@@ -114,14 +120,24 @@ class Defaults {
     return NORMAL_BILLIARD_BALLS_DATA.map(data => {
       let [number, [x, y]] = data;
       let center = new Point(x, y);
-      let circle = new Circle(center, NORMAL_BILLIARD_BALL_RADIUS);
+      // let circle = new Circle(center, NORMAL_BILLIARD_BALL_RADIUS);
+      let circle = new Circle(center, NORMAL_BILLIARD_BALL_RADIUS * 0.99);
       let velocity = new Velocity(NORMAL_BILLIARD_BALL_VELOCITY_X,
                                   NORMAL_BILLIARD_BALL_VELOCITY_Y);
+      // if (number === 1) {
+      //   center = new Point(CUE_BALL_X, CUE_BALL_Y + 20);
+      //   circle = new Circle(center, CUE_BALL_RADIUS);
+      //   velocity = new Velocity(0, -2);
+      // }
       let physicalBall = new PhysicalBall(circle, NORMAL_BILLIARD_BALL_MASS,
                                           velocity);
       let normal_billiard_ball = new NormalBilliardBall(physicalBall, number);
       return normal_billiard_ball;
     });
+  }
+
+  static getCollisionLeeway() {
+    return COLLISION_LEEWAY;
   }
 
 }

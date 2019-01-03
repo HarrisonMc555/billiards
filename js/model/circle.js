@@ -1,5 +1,10 @@
 'use strict';
 
+/* Why isn't this working??!! */
+// const Defaults = require('./defaults');
+// const COLLISION_LEEWAY = 0.01;
+const COLLISION_LEEWAY = 0.00;
+
 class Circle {
 
   constructor(center, radius) {
@@ -16,14 +21,24 @@ class Circle {
     // dimensions of the wall.
     let distanceSquared =
         this.center.getDistanceSquaredToAxisAlignedLine(axisAlignedLine);
-    return distanceSquared < this.getRadiusSquared();
+    let collides = distanceSquared <
+        this.getRadiusSquared() + COLLISION_LEEWAY;
+    if (collides) {
+      return true;
+    } else {
+      return false;
+    }
+    // return distanceSquared <
+    //   // this.getRadiusSquared() + Defaults.getCollisionLeeway();
+    //   this.getRadiusSquared() + COLLISION_LEEWAY;
   }
 
   collidesWithCircle(circle) {
     let combinedRadius = this.radius + circle.radius;
     let combinedRadiusSquared = combinedRadius * combinedRadius;
     return this.center.getDistanceSquaredTo(circle.center) <
-      combinedRadiusSquared;
+      // combinedRadiusSquared + Defaults.getCollisionLeeway();
+      combinedRadiusSquared + COLLISION_LEEWAY;
   }
 
   getRadiusSquared() {
