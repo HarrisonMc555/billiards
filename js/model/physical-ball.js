@@ -12,6 +12,12 @@ class PhysicalBall {
     this.velocity = velocity;
   }
 
+  getNextCircle() {
+    let circle = this.circle.clone();
+    circle.move(this.velocity.x, this.velocity.y);
+    return circle;
+  }
+
   maybeCollideWithWall(wall) {
     if (this.willCollideWithWall(wall)) {
       console.log(this, 'bouncing off', wall);
@@ -24,12 +30,6 @@ class PhysicalBall {
   willCollideWithWall(wall) {
     let nextCircle = this.getNextCircle();
     return nextCircle.collidesWithAxisAlignedLine(wall);
-  }
-
-  getNextCircle() {
-    let circle = this.circle.clone();
-    circle.move(this.velocity.x, this.velocity.y);
-    return circle;
   }
 
   bounceOffWall(wall) {
