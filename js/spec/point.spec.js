@@ -1,3 +1,5 @@
+'use strict';
+
 const Point = require('../model/point');
 
 describe('Point', function() {
