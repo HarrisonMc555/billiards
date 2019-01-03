@@ -13,6 +13,9 @@ class BoardPainter {
   paintBoard(ctx, board) {
     this.tablePainter.paintTable(ctx, board.table);
     this.ballPainter.paintBilliardBalls(ctx, board.billiardBalls);
+    if (board._debug.collidedLast) {
+      console.log('painted after collision');
+    }
   }
 
   static createDefault() {

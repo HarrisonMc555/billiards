@@ -19,6 +19,7 @@ class Board {
     this.table = table;
     this.billiardBalls = billiardBalls;
     this._anyStillMoving = true;
+    this._debug = {};
   }
 
   getAllPhysicalBalls() {
@@ -42,7 +43,7 @@ class Board {
 
   moveAllPhysicalBalls() {
     let collidedBalls = this.updateVelocities();
-    this.updatePositions(collidedBalls);
+    this.updatePositionsExcept(collidedBalls);
     this.roundValues();
     /* With just rounding, we'll never get to zero */
     this.stopReallySlowBalls();
@@ -110,14 +111,22 @@ class Board {
     physicalBall.velocity.scale(FRICTION_FACTOR);
   }
 
-  updatePositions(collidedBalls) {
+  updatePositionsExcept(collidedBalls) {
     let allPhysicalBalls = this.billiardBalls.getAllPhysicalBalls();
     let nonCollidedBalls = allPhysicalBalls.filter(
       ball => !collidedBalls.has(ball));
-    // allPhysicalBalls.forEach(physicalBall =>
-    //                          this.updatePosition(physicalBall));
-    nonCollidedBalls.forEach(physicalBall =>
-                             this.updatePosition(physicalBall));
+    this.updatePositions(nonCollidedBalls);
+    if (SetUtil.empty(collidedBalls)) {
+      this._debug.collidedLast = false;
+    } else {
+      this._debug.collidedLast = true;
+      // console.log('Done updating positions of collided balls');
+    }
+  }
+
+  updatePositions(physicalBalls) {
+    physicalBalls.forEach(physicalBall =>
+                          this.updatePosition(physicalBall));
   }
 
   updatePosition(physicalBall) {

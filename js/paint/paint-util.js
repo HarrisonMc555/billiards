@@ -13,11 +13,11 @@ module.exports = PaintUtil;
 const ARROW_LINE_WIDTH = 5;
 const ARROW_HEAD_WIDTH = 10;
 function paintArrow(ctx, start, end) {
-  dx = end.x - start.x;
-  dy = end.y - start.y;
-  length = start.getDistanceTo(end);
-  // width = length * ARROW_LINE_WIDTH_AS_FRACTION_OF_LENGTH;
-  width = ARROW_LINE_WIDTH;
+  let dx = end.x - start.x;
+  let dy = end.y - start.y;
+  let length = start.getDistanceTo(end);
+  // let width = length * ARROW_LINE_WIDTH_AS_FRACTION_OF_LENGTH;
+  let width = ARROW_LINE_WIDTH;
 
   ctx.fillStyle = 'red';
   ctx.strokeStyle = 'red';
@@ -30,7 +30,7 @@ function paintArrow(ctx, start, end) {
   ctx.stroke();
 
   /* Draw head */
-  let lineTheta = math.atan2(dy, dx);
+  let lineTheta = Math.atan2(dy, dx);
   let headTheta1 = MathUtil.rightAngleTo(lineTheta);
   let headTheta2 = MathUtil.oppositeAngle(headTheta1);
   let headCrossX = end.x - ARROW_HEAD_WIDTH*Math.cos(lineTheta);
@@ -47,9 +47,11 @@ function paintArrow(ctx, start, end) {
   ctx.fill();
 }
 
+const VELOCITY_FACTOR = 10;
 function paintVelocity(ctx, physicalBall) {
   let start = physicalBall.center;
   let velocity = physicalBall.velocity;
-  let end = start.createPointOffsetBy(velocity.x, velocity.y);
+  let end = start.createPointOffsetBy(velocity.x * VELOCITY_FACTOR,
+                                      velocity.y * VELOCITY_FACTOR);
   paintArrow(ctx, start, end);
 }

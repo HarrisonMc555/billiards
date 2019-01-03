@@ -35,7 +35,9 @@ class BilliardBallsPainter {
   paintBilliardBall(ctx, billiardBall, paintFunction) {
     paintFunction(ctx, billiardBall);
     PhysicalBallPaintUtils.paintHighlights(ctx, billiardBall.physicalBall);
-    PaintUtil.paintVelocity(billiardBall.physicalBall);
+    if (billiardBall.physicalBall.velocity.getMagnitudeSquared() > 1) {
+      PaintUtil.paintVelocity(ctx, billiardBall.physicalBall);
+    }
   }
 
   static createDefault() {
