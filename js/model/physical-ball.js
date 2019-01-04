@@ -20,7 +20,7 @@ class PhysicalBall {
 
   maybeCollideWithWall(wall) {
     if (this.willCollideWithWall(wall)) {
-      console.log(this, 'bouncing off', wall);
+      // console.log(this, 'bouncing off', wall);
       this.bounceOffWall(wall);
       return true;
     }

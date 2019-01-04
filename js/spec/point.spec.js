@@ -139,8 +139,8 @@ describe('Point', function() {
     expect(point3.getDistanceSquaredTo(point1)).toBeCloseTo(98, 4);
   });
 
-  xit('distance to axis aligned line...', function() {
-    // TODO
-  });
+  // xit('distance to axis aligned line...', function() {
+  //   // TODO
+  // });
   
 });
