@@ -5,6 +5,7 @@ const MathUtil = Object.freeze({
   oppositeAngle: oppositeAngle,
   rightAngleTo: rightAngleTo,
   atan2positive: atan2positive,
+  sec: sec,
   roundToNearestMultiple: roundToNearestMultiple,
 });
 
@@ -24,6 +25,10 @@ function rightAngleTo(angle) {
 
 function atan2positive(num, den) {
   return mod(Math.atan2(num, den), FULL_CIRCLE);
+}
+
+function sec(angle) {
+  return 1 / Math.cos(angle);
 }
 
 /**

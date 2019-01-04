@@ -11,12 +11,19 @@ const Util = require('./util');
 
 describe('PhysicalBall', function() {
 
+  let ball;
+  let ball1;
+  let ball2;
+
   beforeEach(function() {
     Util.addCustomEqualityTesters();
+    ball = defaultBall();
+    ball1 = defaultBall();
+    ball2 = defaultBall();
+    spyOn(ball1, 'bounceOffPhysicalBall').and.callThrough();
   });
 
   it('create', function() {
-    let ball = defaultBall();
     expect(ball).toEqual(defaultBall());
     expect(ball.circle).toEqual(defaultCircle());
     expect(ball.circle.center).toEqual(defaultCenter());
@@ -30,14 +37,12 @@ describe('PhysicalBall', function() {
   });
 
   it('getNextCircle when not moving', function() {
-    let ball = defaultBall();
     ball.velocity = new Velocity(0, 0);
     let nextCircle = ball.getNextCircle();
     expect(ball.circle).toEqual(nextCircle);
   });
   
   it('getNextCircle when moving in x', function() {
-    let ball = defaultBall();
     ball.velocity = new Velocity(3, 0);
     let nextCircle = ball.getNextCircle();
     expect(ball.circle.center.x + 3).toBe(nextCircle.center.x);
@@ -45,7 +50,6 @@ describe('PhysicalBall', function() {
   });
   
   it('getNextCircle when moving in y', function() {
-    let ball = defaultBall();
     ball.velocity = new Velocity(0, -2);
     let nextCircle = ball.getNextCircle();
     expect(ball.circle.center.y - 2).toBe(nextCircle.center.y);
@@ -53,7 +57,6 @@ describe('PhysicalBall', function() {
   });
   
   it('getNextCircle when moving in both directions', function() {
-    let ball = defaultBall();
     ball.velocity = new Velocity(-4, 5);
     let nextCircle = ball.getNextCircle();
     expect(ball.circle.center.x - 4).toBe(nextCircle.center.x);
@@ -61,19 +64,19 @@ describe('PhysicalBall', function() {
   });
 
   it('won\'t collide with far away wall', function() {
-    let ball = getMovingUpRightBall();
+    ball = getMovingUpRightBall();
     let wall = getFarAwayWall();
     expect(ball.willCollideWithWall(wall)).toBe(false);
   });
 
   it('will collide with touching wall', function() {
-    let ball = getMovingUpRightBall();
+    ball = getMovingUpRightBall();
     let wall = getTopTouchingWall();
     expect(ball.willCollideWithWall(wall)).toBe(true);
   });
 
   it('won\'t collide with far away wall', function() {
-    let ball = getMovingUpRightBall();
+    ball = getMovingUpRightBall();
     let wall = getFarAwayWall();
     expect(ball.maybeCollideWithWall(wall)).toBe(false);
     /* Should not change velocity */
@@ -81,7 +84,7 @@ describe('PhysicalBall', function() {
   });
 
   it('will collide with touching wall', function() {
-    let ball = getMovingUpRightBall();
+    ball = getMovingUpRightBall();
     let wall = getTopTouchingWall();
     expect(ball.maybeCollideWithWall(wall)).toBe(true);
     /* SHOULD change velocity */
@@ -93,12 +96,10 @@ describe('PhysicalBall', function() {
 
   it('moving ball hitting stationary ball head on switches velocities',
      function() {
-       let ball1 = defaultBall();
        ball1.circle.center = new Point(0, 0);
        ball1.circle.radius = 1;
        ball1.mass = 1;
        ball1.velocity = new Velocity(1, 0);
-       let ball2 = defaultBall();
        ball2.circle.center = new Point(2, 0);
        ball2.circle.radius = 1;
        ball2.mass = 1;
@@ -107,9 +108,34 @@ describe('PhysicalBall', function() {
        expect(ball1.getNextCircle()).toEqual(new Circle(new Point(1, 0), 1));
        expect(ball2.getNextCircle()).toEqual(new Circle(new Point(2, 0), 1));
        expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball2.willCollideWithPhysicalBall(ball1)).toBe(true);
        expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
        expect(ball1.velocity).toEqual(new Velocity(0, 0));
        expect(ball2.velocity).toEqual(new Velocity(1, 0));
+       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
+       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledTimes(1);
+     });
+  
+  it('moving ball hitting ball moving opposite direction head on switches ' +
+     'velocities',
+     function() {
+       ball1.circle.center = new Point(0, 0);
+       ball1.circle.radius = 1;
+       ball1.mass = 1;
+       ball1.velocity = new Velocity(1, 0);
+       ball2.circle.center = new Point(3, 0);
+       ball2.circle.radius = 1;
+       ball2.mass = 1;
+       ball2.velocity = new Velocity(-1, 0);
+       expect(ball1.velocity.x).toBe(1);
+       expect(ball1.getNextCircle()).toEqual(new Circle(new Point(1, 0), 1));
+       expect(ball2.getNextCircle()).toEqual(new Circle(new Point(2, 0), 1));
+       expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball2.willCollideWithPhysicalBall(ball1)).toBe(true);
+       expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.velocity).toEqual(new Velocity(-1, 0));
+       expect(ball2.velocity).toEqual(new Velocity(1, 0));
+       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
      });
   
 });
