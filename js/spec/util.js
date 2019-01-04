@@ -5,6 +5,8 @@ const AxisAlignedLine = require('../model/axis-aligned-line');
 const Velocity = require('../model/velocity');
 const PhysicalBall = require('../model/physical-ball');
 
+const LEEWAY = 0.0001;
+
 const pointEquality = function(first, second) {
   if (first instanceof Point && second instanceof Point) {
     return pointsEqual(first, second);
@@ -13,7 +15,8 @@ const pointEquality = function(first, second) {
 };
 
 function pointsEqual(point1, point2) {
-  return point1.x === point2.x && point1.y === point2.y;
+  return floatingEqual(point1.x, point2.x) &&
+    floatingEqual(point1.y, point2.y);
 }
 
 
@@ -27,7 +30,7 @@ const circleEquality = function(first, second) {
 
 function circlesEqual(circle1, circle2) {
   return pointsEqual(circle1.center, circle2.center) &&
-    circle1.radius && circle2.radius;
+    floatingEqual(circle1.radius, circle2.radius);
 }
 
 
@@ -40,7 +43,8 @@ const velocityEquality = function(first, second) {
 };
 
 function velocitiesEqual(velocity1, velocity2) {
-  return velocity1.x === velocity2.x && velocity1.y === velocity2.y;
+  return floatingEqual(velocity1.x, velocity2.x) &&
+    floatingEqual(velocity1.y, velocity2.y);
 }
 
 
@@ -53,9 +57,9 @@ const physicalBallEquality = function(first, second) {
 };
 
 function physicalBallsEqual(physicalBall1, physicalBall2) {
-  return pointsEqual(physicalBall1.circle, physicalBall2.circle) &&
-    physicalBall1.mass && physicalBall2.mass &&
-    velocitiesEqual(physicalBall1.circle, physicalBall2.circle);
+  return circlesEqual(physicalBall1.circle, physicalBall2.circle) &&
+    floatingEqual(physicalBall1.mass, physicalBall2.mass) &&
+    velocitiesEqual(physicalBall1.velocity, physicalBall2.velocity);
 }
 
 
@@ -69,8 +73,8 @@ const rectangleEquality = function(first, second) {
 
 function rectanglesEqual(rectangle1, rectangle2) {
   return pointsEqual(rectangle1.topLeft, rectangle2.topLeft) &&
-    rectangle1.width && rectangle2.width &&
-    rectangle1.height && rectangle2.height;
+    floatingEqual(rectangle1.width, rectangle2.width) &&
+    floatingEqual(rectangle1.height, rectangle2.height);
 }
 
 
@@ -84,8 +88,8 @@ const axisAlignedLineEquality = function(first, second) {
 
 function axisAlignedLinesEqual(axisAlignedLine1, axisAlignedLine2) {
   return pointsEqual(axisAlignedLine1.corner, axisAlignedLine2.corner) &&
-    axisAlignedLine1.direction && axisAlignedLine2.direction &&
-    axisAlignedLine1.length && axisAlignedLine2.length;
+    axisAlignedLine1.direction == axisAlignedLine2.direction &&
+    floatingEqual(axisAlignedLine1.length, axisAlignedLine2.length);
 }
 
 
@@ -96,6 +100,11 @@ function addCustomEqualityTesters() {
   jasmine.addCustomEqualityTester(physicalBallEquality);
   jasmine.addCustomEqualityTester(rectangleEquality);
   jasmine.addCustomEqualityTester(axisAlignedLineEquality);
+}
+
+
+function floatingEqual(float1, float2) {
+  return Math.abs(float1 - float2) < LEEWAY;
 }
 
 

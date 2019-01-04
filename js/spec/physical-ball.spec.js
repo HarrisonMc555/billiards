@@ -91,25 +91,26 @@ describe('PhysicalBall', function() {
     expect(ball.velocity.x).toBe(getUpRightVelocity().x);
   });
 
-  // it('don\'t collide with far away wall', function() {
-  //   let ball = defaultBall();
-  //   let wall = getFarAwayWall();
-  //   expect(ball.maybeCollideWithWall(wall)).toBe(false);
-  //   /* Should not change velocity */
-  //   expect(ball.velocity).toEqual(defaultVelocity());
-  // });
-  
-  // it('collide with touching wall', function() {
-  //   let ball = defaultBall();
-  //   ball.velocity = getUpRightVelocity();
-  //   let wall = getTopTouchingWall();
-  //   expect(ball.maybeCollideWithWall(wall)).toBe(true);
-  //   /* Should change velocity */
-  //   expect(ball.velocity).not.toEqual(getUpRightVelocity());
-  //   /* Should bounce vertically */
-  //   expect(ball.velocity.y).toBe(- getUpRightVelocity().y);
-  //   expect(ball.velocity.x).toBe(getUpRightVelocity().x);
-  // });
+  it('moving ball hitting stationary ball head on switches velocities',
+     function() {
+       let ball1 = defaultBall();
+       ball1.circle.center = new Point(0, 0);
+       ball1.circle.radius = 1;
+       ball1.mass = 1;
+       ball1.velocity = new Velocity(1, 0);
+       let ball2 = defaultBall();
+       ball2.circle.center = new Point(2, 0);
+       ball2.circle.radius = 1;
+       ball2.mass = 1;
+       ball2.velocity = new Velocity(0, 0);
+       expect(ball1.velocity.x).toBe(1);
+       expect(ball1.getNextCircle()).toEqual(new Circle(new Point(1, 0), 1));
+       expect(ball2.getNextCircle()).toEqual(new Circle(new Point(2, 0), 1));
+       expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.velocity).toEqual(new Velocity(0, 0));
+       expect(ball2.velocity).toEqual(new Velocity(1, 0));
+     });
   
 });
 
@@ -122,18 +123,40 @@ function defaultBall() {
 
 function defaultCircle() {
   let center = defaultCenter();
-  let radius = 1;
+  let radius = defaultRadius();
   return new Circle(center, radius);
 }
 
+function defaultRadius() {
+  return 1;
+}
+
 function defaultCenter() {
-  let x = 0;
-  let y = 0;
+  let x = defaultPositionX();
+  let y = defaultPositionY();
   return new Point(x, y);
 }
 
+function defaultPositionX() {
+  return 0;
+}
+
+function defaultPositionY() {
+  return 0;
+}
+
 function defaultVelocity() {
-  return new Velocity(0, 0);
+  let x = defaultVelocityX();
+  let y = defaultVelocityY();
+  return new Velocity(x, y);
+}
+
+function defaultVelocityX() {
+  return 0;
+}
+
+function defaultVelocityY() {
+  return 0;
 }
 
 function defaultMass() {
@@ -163,4 +186,13 @@ function getMovingUpRightBall() {
 
 function getUpRightVelocity() {
   return new Velocity(1, 1);
+}
+
+function getKineticEnergy(ball) {
+  let velocity = ball.velocity.getMagnitude();
+  return 0.5 * ball.mass * (velocity * velocity);
+}
+
+function getMomentumVector(ball) {
+  return [ball.mass * ball.velocity.x, ball.mass * ball.velocity.y];
 }

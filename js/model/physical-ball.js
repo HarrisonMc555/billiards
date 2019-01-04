@@ -46,7 +46,7 @@ class PhysicalBall {
     let thisNextCircle = this.getNextCircle();
     let otherNextCircle = physicalBall.getNextCircle();
     if (thisNextCircle.collidesWithCircle(otherNextCircle)) {
-      console.log('bouncing off ball:', this, physicalBall);
+      // console.log('bouncing off ball:', this, physicalBall);
       this.bounceOffPhysicalBall(physicalBall);
       return true;
     }
@@ -60,6 +60,12 @@ class PhysicalBall {
 
   collidesWithPhysicalBall(physicalBall) {
     return this.circle.collidesWithCircle(physicalBall.circle);
+  }
+
+  willCollideWithPhysicalBall(physicalBall) {
+    let thisNextCircle = this.getNextCircle();
+    let otherNextCircle = physicalBall.getNextCircle();
+    return thisNextCircle.collidesWithCircle(otherNextCircle);
   }
 
   bounceOffPhysicalBall(physicalBall) {

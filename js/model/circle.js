@@ -16,6 +16,10 @@ class Circle {
     this.center.move(dx, dy);
   }
 
+  moveTo(x, y) {
+    this.center.moveTo(x, y);
+  }
+
   collidesWithAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.

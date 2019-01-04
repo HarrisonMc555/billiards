@@ -43,6 +43,11 @@ class Point {
     this.y += dy;
   }
 
+  moveTo(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
   createPointOffsetBy(dx, dy) {
     return new Point(this.x + dx, this.y + dy);
   }
