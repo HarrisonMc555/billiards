@@ -24,10 +24,15 @@ const count = (arr) => {
   return result;
 };
 
+const sum = (arr) => {
+  return arr.reduce((e, s) => e + s, 0);
+};
+
 const ArrayUtil = Object.freeze({
   someTruthy: someTruthy,
   empty: empty,
   count: count,
+  sum: sum,
 });
 
 module.exports = ArrayUtil;
