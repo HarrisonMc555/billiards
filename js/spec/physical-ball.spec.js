@@ -4,22 +4,19 @@ const Point = require('../model/point');
 const Circle = require('../model/circle');
 const Velocity = require('../model/velocity');
 const PhysicalBall = require('../model/physical-ball');
-const Util = require('./util');
+// const Util = require('./util');
 // const jasmine = require('jasmine');
 
 describe('PhysicalBall', function() {
 
-  beforeEach(function() {
-    expect(Object.keys(jasmine)).toBe(1);
-    // Object.keys(jasmine).forEach(
-    //   key => expect(key).toBe(1));
-    jasmine.addCustomEqualityTester(Util.pointEquality);
-    jasmine.addCustomEqualityTester(Util.circleEquality);
-    jasmine.addCustomEqualityTester(Util.velocityEquality);
-    jasmine.addCustomEqualityTester(Util.physicalBallEquality);
-    jasmine.addCustomEqualityTester(Util.rectangleEquality);
-    jasmine.addCustomEqualityTester(Util.axisAlignedLineEquality);
-  });
+  // beforeEach(function() {
+  //   jasmine.addCustomEqualityTester(Util.pointEquality);
+  //   jasmine.addCustomEqualityTester(Util.circleEquality);
+  //   jasmine.addCustomEqualityTester(Util.velocityEquality);
+  //   jasmine.addCustomEqualityTester(Util.physicalBallEquality);
+  //   jasmine.addCustomEqualityTester(Util.rectangleEquality);
+  //   jasmine.addCustomEqualityTester(Util.axisAlignedLineEquality);
+  // });
 
   it('create', function() {
     let ball = defaultBall();
