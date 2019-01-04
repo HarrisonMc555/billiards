@@ -239,6 +239,7 @@ describe('PhysicalBall', function() {
        expect(ball1.velocity.y).toBeGreaterThan(-1);
        expect(ball2.velocity.y).toBeLessThan(1);
        expect(ball2.velocity.y).toBeGreaterThan(0);
+       expect(ball1.velocity.y).toBeCloseTo(- ball2.velocity.y, 3);
 
        expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
 
