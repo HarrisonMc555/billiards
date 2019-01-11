@@ -50,7 +50,7 @@ class Board {
   }
 
   updateVelocities() {
-    let walls = this.table.getWalls();
+    let walls = this.table.walls();
     let allPhyiscalBalls = this.billiardBalls.getAllPhysicalBalls();
     let collisionManager = new CollisionManager(walls, allPhyiscalBalls);
     let numberOfCollisions = collisionManager.doAllCollisions();
@@ -91,7 +91,7 @@ class Board {
   }
 
   updateVelocityFromHittingWalls(physicalBall) {
-    let collidedArray = this.table.getWalls().map(
+    let collidedArray = this.table.walls().map(
       wall => physicalBall.maybeCollideWithWall(wall));
     return ArrayUtil.someTruthy(collidedArray);
   }

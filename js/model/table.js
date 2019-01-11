@@ -11,7 +11,7 @@ class Table {
     this.holes = holes;
   }
 
-  getWalls() {
+  walls() {
     return this.bounds.getAxisAlignedLines();
   }
 

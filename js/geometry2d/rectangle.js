@@ -6,36 +6,49 @@ const AxisDirection = require('./axis-direction');
 class Rectangle {
 
   constructor(topLeft, width, height) {
-    this.topLeft = topLeft;
-    this.width = width;
-    this.height = height;
+    this._topLeft = topLeft;
+    this._width = width;
+    this._height = height;
+  }
+
+  get topLeft() {
+    return this._topLeft;
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  get height() {
+    return this._height;
   }
 
   getTopLeft() {
-    return this.topLeft;
+    return this._topLeft;
   }
 
   getTopRight() {
-    return this.topLeft.createPointOffsetBy(this.width, 0);
+    return this._topLeft.createPointOffsetBy(this._width, 0);
   }
 
   getBottomLeft() {
-    return this.topLeft.createPointOffsetBy(0, this.height);
+    return this._topLeft.createPointOffsetBy(0, this._height);
   }
 
   getBottomRight() {
-    return this.topLeft.createPointOffsetBy(this.width, this.height);
+    return this._topLeft.createPointOffsetBy(this._width, this._height);
   }
 
   getAxisAlignedLines() {
     let top = new AxisAlignedLine(
-      this.getTopLeft(), AxisDirection.RIGHT, this.width);
+      this.getTopLeft(), AxisDirection.RIGHT, this._width);
     let bottom = new AxisAlignedLine(
-      this.getBottomLeft(), AxisDirection.RIGHT, this.width);
+      this.getBottomLeft(), AxisDirection.RIGHT, this._width);
     let left = new AxisAlignedLine(
-      this.getTopLeft(), AxisDirection.DOWN, this.height);
+      this.getTopLeft(), AxisDirection.DOWN, this._height);
     let right = new AxisAlignedLine(
-      this.getTopRight(), AxisDirection.DOWN, this.height);
+      this.getTopRight(), AxisDirection.DOWN, this._height);
+    console.log([top, bottom, left, right]);
     return [top, bottom, left, right];
   }
 
