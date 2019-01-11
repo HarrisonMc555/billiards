@@ -7,8 +7,16 @@ const Defaults = require('./defaults');
 class Hole {
 
   constructor(circle, holeDirection) {
-    this.circle = circle;
-    this.holeDirection = holeDirection;
+    this._circle = circle;
+    this._holeDirection = holeDirection;
+  }
+
+  get circle() {
+    return this._circle;
+  }
+
+  get holeDirection() {
+    return this._holeDirection;
   }
 
 }
