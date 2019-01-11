@@ -44,7 +44,7 @@ class Point {
   }
 
   translated(dx, dy) {
-    return this._vector.clone().translate(dx, dy);
+    return this.clone().translate(dx, dy);
   }
 
   move(x, y) {
@@ -64,10 +64,6 @@ class Point {
       throw 'Invalid axis direction';
     }
     return this.distanceSquaredTo(linePoint);
-  }
-
-  createPointOffsetBy(dx, dy) {
-    return new Point(this.x + dx, this.y + dy);
   }
 
   static origin() {

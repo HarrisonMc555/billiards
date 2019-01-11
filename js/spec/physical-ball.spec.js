@@ -313,7 +313,7 @@ function getFarAwayCorner() {
 
 function getTopTouchingWall() {
   let ball = getMovingUpRightBall();
-  let corner = ball.circle.center.createPointOffsetBy(-50, ball.velocity.y);
+  let corner = ball.circle.center.translated(-50, ball.velocity.y);
   return new AxisAlignedLine(corner, AxisDirection.RIGHT, 100);
 }
 

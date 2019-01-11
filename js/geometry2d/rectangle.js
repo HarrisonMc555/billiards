@@ -28,15 +28,15 @@ class Rectangle {
   }
 
   getTopRight() {
-    return this._topLeft.createPointOffsetBy(this._width, 0);
+    return this._topLeft.translated(this._width, 0);
   }
 
   getBottomLeft() {
-    return this._topLeft.createPointOffsetBy(0, this._height);
+    return this._topLeft.translated(0, this._height);
   }
 
   getBottomRight() {
-    return this._topLeft.createPointOffsetBy(this._width, this._height);
+    return this._topLeft.translated(this._width, this._height);
   }
 
   getAxisAlignedLines() {

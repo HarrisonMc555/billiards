@@ -51,7 +51,7 @@ const VELOCITY_FACTOR = 10;
 function paintVelocity(ctx, physicalBall) {
   let start = physicalBall.center;
   let velocity = physicalBall.velocity;
-  let end = start.createPointOffsetBy(velocity.x * VELOCITY_FACTOR,
+  let end = start.translated(velocity.x * VELOCITY_FACTOR,
                                       velocity.y * VELOCITY_FACTOR);
   paintArrow(ctx, start, end);
 }
