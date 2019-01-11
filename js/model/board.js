@@ -4,7 +4,7 @@ const Table = require('./table');
 const BilliardBalls = require('./billiard-balls');
 const ArrayUtil = require('../util/array-util');
 const SetUtil = require('../util/set-util');
-const CollisionManager = require('./collision-manager');
+const CollisionManager = require('../physics2d/collision-manager');
 
 const COLLISION_SLOWDOWN_REDUCE_FACTOR = 0.1;
 const COLLISION_SLOWDOWN_FACTOR = 1 - COLLISION_SLOWDOWN_REDUCE_FACTOR;

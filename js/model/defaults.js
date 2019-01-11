@@ -1,12 +1,12 @@
 'use strict';
 
-const Point = require('./point');
-const Circle = require('./circle');
-const Rectangle = require('./rectangle');
+const Point = require('../geometry2d/point');
+const Circle = require('../geometry2d/circle');
+const Rectangle = require('../geometry2d/rectangle');
+const Velocity = require('../physics2d/velocity');
 const Hole = require('./hole');
 const HoleDirection = require('./hole-direction');
-const Velocity = require('./velocity');
-const PhysicalBall = require('./physical-ball');
+const PhysicalBall = require('../physics2d/physical-ball');
 const CueBall = require('./cue-ball');
 const NormalBilliardBall = require('./normal-billiard-ball');
 

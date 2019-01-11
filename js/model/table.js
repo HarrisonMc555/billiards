@@ -1,8 +1,8 @@
 'use strict';
 
 const Defaults = require('./defaults');
-const AxisAlignedLine = require('./axis-aligned-line');
-const AxisDirection = require('./axis-direction');
+const AxisAlignedLine = require('../geometry2d/axis-aligned-line');
+const AxisDirection = require('../geometry2d/axis-direction');
 
 class Table {
 

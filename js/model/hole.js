@@ -1,7 +1,7 @@
 'use strict';
 
-const Point = require('./point');
-const Circle = require('./circle');
+const Point = require('../geometry2d/point');
+const Circle = require('../geometry2d/circle');
 const Defaults = require('./defaults');
 
 class Hole {

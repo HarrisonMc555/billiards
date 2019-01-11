@@ -1,7 +1,7 @@
 'use strict';
 
 const paintCircle = require('./paint-circle');
-const Circle = require('../model/circle');
+const Circle = require('../geometry2d/circle');
 
 /* Utils */
 const BilliardBallsPaintUtils = {

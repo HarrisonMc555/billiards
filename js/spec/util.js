@@ -3,7 +3,7 @@ const Circle = require('../model/circle');
 const Rectangle = require('../model/rectangle');
 const AxisAlignedLine = require('../model/axis-aligned-line');
 const Velocity = require('../model/velocity');
-const PhysicalBall = require('../model/physical-ball');
+const PhysicalBall = require('../mode../physics2d/physical-ball');
 
 const LEEWAY = 0.0001;
 

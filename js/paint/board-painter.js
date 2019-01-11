@@ -2,9 +2,9 @@
 
 const TablePainter = require('./table-painter');
 const BilliardBallsPainter = require('./billiard-balls-painter');
-const Point = require('../model/point');
-const CueStick = require('../model/cue-stick');
 const CueStickPaintUtils = require('./cue-stick-paint-utils');
+const Point = require('../geometry2d/point');
+const CueStick = require('../model/cue-stick');
 
 class BoardPainter {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const Circle = require('../model/circle');
+const Circle = require('../geometry2d/circle');
 const paintCircle = require('./paint-circle');
 
 const TABLE_TOP_COLOR = require('./table-top-color');

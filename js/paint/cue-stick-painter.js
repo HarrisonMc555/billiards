@@ -1,8 +1,5 @@
 'use strict';
 
-const PhysicalBallPaintUtils = require('./physical-ball-paint-utils');
-const BilliardBallsPaintUtils = require('./billiard-balls-paint-utils');
-const PaintUtil = require('./paint-util');
 const CueStickPaintUtils = require('./cue-stick-paint-utils');
 
 class CueStickPainter {

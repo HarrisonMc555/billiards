@@ -1,7 +1,7 @@
 'use strict';
 
 const Velocity = require('./velocity');
-const AxisDirection = require('./axis-direction');
+const AxisDirection = require('../geometry2d/axis-direction');
 const MathUtil = require('../util/math-util');
 
 class PhysicalBall {
