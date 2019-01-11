@@ -1,58 +1,55 @@
 'use strict';
 
-/* Why isn't this working??!! */
-// const Defaults = require('./defaults');
-// const COLLISION_LEEWAY = 0.01;
-const COLLISION_LEEWAY = 0.00;
-
 class Circle {
 
   constructor(center, radius) {
-    this.center = center;
-    this.radius = radius;
+    this._center = center;
+    this._radius = radius;
+  }
+
+  get center() {
+    return this._center;
+  }
+
+  get radius() {
+    return this._radius;
   }
 
   clone() {
-    let center = this.center.clone();
-    let circle = new Circle(center, this.radius);
-    return circle;
+    let center = this._center.clone();
+    return new Circle(center, this._radius);
   }
 
   move(dx, dy) {
-    this.center.move(dx, dy);
+    this._center.move(dx, dy);
   }
 
   moveTo(x, y) {
-    this.center.moveTo(x, y);
+    this._center.moveTo(x, y);
   }
 
   collidesWithAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
     let distanceSquared =
-        this.center.getDistanceSquaredToAxisAlignedLine(axisAlignedLine);
-    let collides = distanceSquared <
-        this.getRadiusSquared() + COLLISION_LEEWAY;
+        this._center.getDistanceSquaredToAxisAlignedLine(axisAlignedLine);
+    let collides = distanceSquared < this.getRadiusSquared();
     if (collides) {
       return true;
     } else {
       return false;
     }
-    // return distanceSquared <
-    //   // this.getRadiusSquared() + Defaults.getCollisionLeeway();
-    //   this.getRadiusSquared() + COLLISION_LEEWAY;
   }
 
   collidesWithCircle(circle) {
-    let combinedRadius = this.radius + circle.radius;
+    let combinedRadius = this._radius + circle._radius;
     let combinedRadiusSquared = combinedRadius * combinedRadius;
-    return this.center.getDistanceSquaredTo(circle.center) <
-      // combinedRadiusSquared + Defaults.getCollisionLeeway();
-      combinedRadiusSquared + COLLISION_LEEWAY;
+    return this._center.getDistanceSquaredTo(circle._center) <
+      combinedRadiusSquared;
   }
 
   getRadiusSquared() {
-    return this.radius * this.radius;
+    return this._radius * this._radius;
   }
 
 }
