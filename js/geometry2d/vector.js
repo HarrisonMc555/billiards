@@ -21,20 +21,20 @@ class Vector {
     return new Vector(this._x, this._y);
   }
 
-  getMagnitude() {
-    return Math.sqrt(this.getMagnitudeSquared());
+  magnitude() {
+    return Math.sqrt(this.magnitudeSquared());
   }
 
-  getMagnitudeSquared() {
+  magnitudeSquared() {
     return this._x*this._x + this._y*this._y;
   }
 
-  getAngle() {
+  angle() {
     return MathUtil.atan2positive(this._y, this._x);
   }
 
-  getDirection() {
-    return this.getAngle();
+  direction() {
+    return this.angle();
   }
 
   addVector(vector) {
@@ -77,8 +77,8 @@ class Vector {
     return this.clone().scale(scalarFactor);
   }
 
-  getUnitVector() {
-    let magnitude = this.getMagnitude();
+  unitVector() {
+    let magnitude = this.magnitude();
     return new Vector(this._x / magnitude, this._y / magnitude);
   }
 
@@ -87,7 +87,7 @@ class Vector {
   }
 
   dottedInto(vector) {
-    let unitVector = vector.getUnitVector();
+    let unitVector = vector.unitVector();
     let magnitude = Vector.dotProduct(this, unitVector);
     return unitVector.scale(magnitude);
   }

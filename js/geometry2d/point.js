@@ -55,7 +55,7 @@ class Point {
   }
 
   angleTo(point) {
-    return this.vectorTo(point).getAngle();
+    return this.vectorTo(point).angle();
   }
 
   move(dx, dy) {
