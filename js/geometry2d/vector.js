@@ -54,9 +54,7 @@ class Vector {
   }
 
   minusVector(vector) {
-    let result = this.clone();
-    result.addVector(vector);
-    return result;
+    return this.clone().subtractVector(vector);
   }
 
   negate() {
