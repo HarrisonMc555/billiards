@@ -70,12 +70,6 @@ class Point {
     return new Point(this.x + dx, this.y + dy);
   }
 
-  round(roundingFactor) {
-    let newX = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
-    let newY = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
-    this._vector = new Vector(newX, newY);
-  }
-
   static origin() {
     return Vector.zero();
   }

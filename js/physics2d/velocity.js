@@ -33,12 +33,6 @@ class Velocity {
     return MathUtil.atan2positive(this.y, this.x);
   }
 
-  round(roundingFactor) {
-    // this._vector.round(roundingFactor);
-    // this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
-    // this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
-  }
-
   stopIfReallySlow(minSpeed) {
     let minSpeedSquared = minSpeed * minSpeed;
     if (this.getMagnitudeSquared() < minSpeedSquared) {

@@ -10,7 +10,6 @@ const COLLISION_SLOWDOWN_REDUCE_FACTOR = 0.1;
 const COLLISION_SLOWDOWN_FACTOR = 1 - COLLISION_SLOWDOWN_REDUCE_FACTOR;
 const FRICTION_REDUCE_FACTOR = 0.01;
 const FRICTION_FACTOR = 1 - FRICTION_REDUCE_FACTOR;
-const ROUNDING_FACTOR = 0.0001;
 const MIN_SPEED = 0.1;
 
 class Board {
@@ -44,8 +43,7 @@ class Board {
   moveAllPhysicalBalls() {
     let collidedBalls = this.updateVelocities();
     this.updatePositionsExcept(collidedBalls);
-    this.roundValues();
-    /* With just rounding, we'll never get to zero */
+    /* If we don't do something, we'll never get to zero */
     this.stopReallySlowBalls();
   }
 
@@ -136,23 +134,6 @@ class Board {
   areAnyStillMoving() {
     let allPhysicalBalls = this.billiardBalls.getAllPhysicalBalls();
     return allPhysicalBalls.some(physicalBall => physicalBall.moving());
-  }
-
-  roundValues() {
-    this.roundVelocities();
-    this.roundPositions();
-  }
-
-  roundVelocities() {
-    this.billiardBalls.getAllPhysicalBalls().forEach(
-      physicalBall => physicalBall.roundVelocity(ROUNDING_FACTOR)
-    );
-  }
-
-  roundPositions() {
-    this.billiardBalls.getAllPhysicalBalls().forEach(
-      physicalBall => physicalBall.roundPosition(ROUNDING_FACTOR)
-    );
   }
 
   stopReallySlowBalls() {
