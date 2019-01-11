@@ -12,8 +12,8 @@ class Circle {
     this.radius = radius;
   }
 
-  cloned() {
-    let center = this.center.cloned();
+  clone() {
+    let center = this.center.clone();
     let circle = new Circle(center, this.radius);
     return circle;
   }

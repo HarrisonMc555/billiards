@@ -18,7 +18,7 @@ class Point {
     return this._vector.y;
   }
 
-  cloned() {
+  clone() {
     return new Point(this.x, this.y);
   }
 

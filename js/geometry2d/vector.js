@@ -17,7 +17,7 @@ class Vector {
     return this._y;
   }
 
-  cloned() {
+  clone() {
     return new Vector(this._x, this._y);
   }
 
@@ -40,7 +40,7 @@ class Vector {
   }
 
   plusVector(vector) {
-    return this.cloned().addVector(vector);
+    return this.clone().addVector(vector);
   }
 
   subtractVector(vector) {
@@ -50,7 +50,7 @@ class Vector {
   }
 
   minusVector(vector) {
-    let result = this.cloned();
+    let result = this.clone();
     result.addVector(vector);
     return result;
   }
@@ -62,7 +62,7 @@ class Vector {
   }
 
   negated() {
-    return this.cloned().negate();
+    return this.clone().negate();
   }
 
   scale(scalarFactor) {
@@ -72,7 +72,7 @@ class Vector {
   }
 
   scaled(scalarFactor) {
-    return this.cloned().scale(scalarFactor);
+    return this.clone().scale(scalarFactor);
   }
 
   getUnitVector() {
