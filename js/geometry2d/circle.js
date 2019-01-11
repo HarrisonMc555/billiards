@@ -12,6 +12,12 @@ class Circle {
     this.radius = radius;
   }
 
+  cloned() {
+    let center = this.center.cloned();
+    let circle = new Circle(center, this.radius);
+    return circle;
+  }
+
   move(dx, dy) {
     this.center.move(dx, dy);
   }
@@ -47,12 +53,6 @@ class Circle {
 
   getRadiusSquared() {
     return this.radius * this.radius;
-  }
-
-  clone() {
-    let center = this.center.clone();
-    let circle = new Circle(center, this.radius);
-    return circle;
   }
 
 }

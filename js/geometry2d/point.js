@@ -18,6 +18,10 @@ class Point {
     return this._vector.y;
   }
 
+  cloned() {
+    return new Point(this.x, this.y);
+  }
+
   getDistanceTo(point) {
     return Math.sqrt(this.getDistanceSquaredTo(point));
   }
@@ -68,10 +72,6 @@ class Point {
     let newX = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
     let newY = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
     this._vector = new Vector(newX, newY);
-  }
-
-  clone() {
-    return new Point(this.x, this.y);
   }
 
 }

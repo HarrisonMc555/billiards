@@ -13,7 +13,7 @@ class PhysicalBall {
   }
 
   getNextCircle() {
-    let circle = this.circle.clone();
+    let circle = this.circle.cloned();
     circle.move(this.velocity.x, this.velocity.y);
     return circle;
   }
