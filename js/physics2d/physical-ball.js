@@ -7,9 +7,21 @@ const MathUtil = require('../util/math-util');
 class PhysicalBall {
 
   constructor(circle, mass, velocity) {
-    this.circle = circle;
-    this.mass = mass;
-    this.velocity = velocity;
+    this._circle = circle;
+    this._mass = mass;
+    this._velocity = velocity;
+  }
+
+  get circle() {
+    return this._circle;
+  }
+
+  get mass() {
+    return this._mass;
+  }
+
+  get velocity() {
+    return this._velocity;
   }
 
   getNextCircle() {
@@ -131,8 +143,8 @@ class PhysicalBall {
 
     // console.log('old ball1 velocity:', this.velocity);
     // console.log('old ball2 velocity:', physicalBall.velocity);
-    this.velocity = new Velocity(v1fx, v1fy);
-    physicalBall.velocity = new Velocity(v2fx, v2fy);
+    this._velocity = new Velocity(v1fx, v1fy);
+    physicalBall._velocity = new Velocity(v2fx, v2fy);
     // console.log('new ball1 velocity:', this.velocity);
     // console.log('new ball2 velocity:', physicalBall.velocity);
   }
