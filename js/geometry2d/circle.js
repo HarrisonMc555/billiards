@@ -20,12 +20,12 @@ class Circle {
     return new Circle(center, this._radius);
   }
 
-  move(dx, dy) {
-    this._center.move(dx, dy);
+  translate(dx, dy) {
+    this._center.translate(dx, dy);
   }
 
-  moveTo(x, y) {
-    this._center.moveTo(x, y);
+  move(x, y) {
+    this._center.move(x, y);
   }
 
   collidesWithAxisAlignedLine(axisAlignedLine) {

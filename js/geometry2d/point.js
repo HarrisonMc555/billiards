@@ -38,12 +38,18 @@ class Point {
     return point._vector.minusVector(this._vector);
   }
 
-  move(dx, dy) {
+  translate(dx, dy) {
     this._vector.addVector(new Vector(dx, dy));
+    return this;
   }
 
-  moveTo(x, y) {
+  translated(dx, dy) {
+    return this._vector.clone().translate(dx, dy);
+  }
+
+  move(x, y) {
     this._vector = new Vector(x, y);
+    return this;
   }
 
   distanceSquaredToAxisAlignedLine(axisAlignedLine) {

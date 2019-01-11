@@ -136,7 +136,7 @@ class Board {
   }
 
   updatePosition(physicalBall) {
-    physicalBall.circle.move(physicalBall.velocity.x, physicalBall.velocity.y);
+    physicalBall.circle.translate(physicalBall.velocity.x, physicalBall.velocity.y);
   }
 
   areAnyStillMoving() {

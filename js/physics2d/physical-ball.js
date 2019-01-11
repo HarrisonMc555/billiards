@@ -26,7 +26,7 @@ class PhysicalBall {
 
   getNextCircle() {
     let circle = this.circle.clone();
-    circle.move(this.velocity.x, this.velocity.y);
+    circle.translate(this.velocity.x, this.velocity.y);
     return circle;
   }
 
@@ -149,8 +149,8 @@ class PhysicalBall {
     // console.log('new ball2 velocity:', physicalBall.velocity);
   }
 
-  move() {
-    this.circle.move(this.velocity.x, this.velocity.y);
+  translate() {
+    this.circle.translate(this.velocity.x, this.velocity.y);
   }
 
   moving() {
