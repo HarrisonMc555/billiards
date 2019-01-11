@@ -38,7 +38,7 @@ const CueStickPaintUtils = {
 module.exports = CueStickPaintUtils;
 
 function paintCueStick(ctx, cueStick) {
-  console.log('paintCueStick');
+  // console.log('paintCueStick');
   paintTip(ctx, cueStick);
   paintFerrule(ctx, cueStick);
   paintTopHalf(ctx, cueStick);
