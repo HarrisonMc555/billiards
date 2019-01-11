@@ -5,8 +5,16 @@ const Defaults = require('./defaults');
 class BilliardBalls {
 
   constructor(cueBall, normalBilliardBalls) {
-    this.cueBall = cueBall;
-    this.normalBilliardBalls = normalBilliardBalls;
+    this._cueBall = cueBall;
+    this._normalBilliardBalls = normalBilliardBalls;
+  }
+
+  get cueBall() {
+    return this._cueBall;
+  }
+
+  get normalBilliardBalls() {
+    return this._normalBilliardBalls;
   }
 
   getAllPhysicalBalls() {
