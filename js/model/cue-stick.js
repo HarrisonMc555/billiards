@@ -3,9 +3,21 @@
 class CueStick {
 
   constructor(tip, angle, length) {
-    this.tip = tip;
-    this.angle = angle;
-    this.length = length;
+    this._tip = tip;
+    this._angle = angle;
+    this._length = length;
+  }
+
+  get tip() {
+    return this._tip;
+  }
+
+  get angle() {
+    return this._angle;
+  }
+
+  get length() {
+    return this._length;
   }
 
 }
