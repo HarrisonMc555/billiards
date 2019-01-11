@@ -46,9 +46,9 @@ class PhysicalBall {
 
   bounceOffWall(wall) {
     if (wall.direction === AxisDirection.RIGHT) {
-      this.velocity.y = -this.velocity.y;
+      this.velocity.negateY();
     } else if (wall.direction === AxisDirection.DOWN) {
-      this.velocity.x = -this.velocity.x;
+      this.velocity.negateX();
     } else {
       throw 'Invalid axis direction';
     }

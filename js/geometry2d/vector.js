@@ -58,7 +58,15 @@ class Vector {
   }
 
   negate() {
+    return this.negateX().negateY();
+  }
+
+  negateX() {
     this._x *= -1;
+    return this;
+  }
+
+  negateY() {
     this._y *= -1;
     return this;
   }
@@ -90,6 +98,10 @@ class Vector {
     let unitVector = vector.unitVector();
     let magnitude = Vector.dotProduct(this, unitVector);
     return unitVector.scale(magnitude);
+  }
+
+  static zero() {
+    return new Vector(0, 0);
   }
 
 }

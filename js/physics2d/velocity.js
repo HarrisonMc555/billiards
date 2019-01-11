@@ -1,12 +1,20 @@
 'use strict';
 
+const Vector = require('../geometry2d/vector');
 const MathUtil = require('../util/math-util');
 
 class Velocity {
 
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this._vector = new Vector(x, y);
+  }
+
+  get x() {
+    return this._vector.x;
+  }
+
+  get y() {
+    return this._vector.y;
   }
 
   getMagnitude() {
@@ -18,11 +26,7 @@ class Velocity {
   }
 
   scale(factor) {
-    let direction = this.direction();
-    let magnitude = this.getMagnitude();
-    let scaledMagnitude = magnitude * factor;
-    this.x = scaledMagnitude * Math.cos(direction);
-    this.y = scaledMagnitude * Math.sin(direction);
+    this._vector.scale(factor);
   }
 
   direction() {
@@ -30,8 +34,9 @@ class Velocity {
   }
 
   round(roundingFactor) {
-    this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
-    this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
+    // this._vector.round(roundingFactor);
+    // this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
+    // this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
   }
 
   stopIfReallySlow(minSpeed) {
@@ -42,8 +47,15 @@ class Velocity {
   }
 
   stop() {
-    this.x = 0;
-    this.y = 0;
+    this._vector = Vector.zero();
+  }
+
+  negateX() {
+    this._vector.negateX();
+  }
+
+  negateY() {
+    this._vector.negateY();
   }
 
 }

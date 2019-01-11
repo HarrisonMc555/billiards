@@ -76,6 +76,10 @@ class Point {
     this._vector = new Vector(newX, newY);
   }
 
+  static origin() {
+    return Vector.zero();
+  }
+
 }
 
 module.exports = Point;
