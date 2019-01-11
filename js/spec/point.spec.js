@@ -60,15 +60,15 @@ describe('Point', function() {
 
   it('distance to self is zero', function() {
     let point1 = new Point(0, 0);
-    expect(point1.getDistanceTo(point1)).toBe(0);
+    expect(point1.distanceTo(point1)).toBe(0);
     let point2 = new Point(4, 2);
-    expect(point2.getDistanceTo(point2)).toBe(0);
+    expect(point2.distanceTo(point2)).toBe(0);
     let point3 = new Point(-7, 6);
-    expect(point3.getDistanceTo(point3)).toBe(0);
+    expect(point3.distanceTo(point3)).toBe(0);
     let point4 = new Point(-5, -3);
-    expect(point4.getDistanceTo(point4)).toBe(0);
+    expect(point4.distanceTo(point4)).toBe(0);
     let point5 = new Point(8, 1);
-    expect(point5.getDistanceTo(point5)).toBe(0);
+    expect(point5.distanceTo(point5)).toBe(0);
   });
 
   it('distance along axis', function() {
@@ -77,17 +77,17 @@ describe('Point', function() {
     let point3 = new Point(3, 2);
     let point4 = new Point(3, 0);
 
-    expect(point1.getDistanceTo(point2)).toBe(2);
-    expect(point2.getDistanceTo(point1)).toBe(2);
+    expect(point1.distanceTo(point2)).toBe(2);
+    expect(point2.distanceTo(point1)).toBe(2);
 
-    expect(point2.getDistanceTo(point3)).toBe(3);
-    expect(point3.getDistanceTo(point2)).toBe(3);
+    expect(point2.distanceTo(point3)).toBe(3);
+    expect(point3.distanceTo(point2)).toBe(3);
 
-    expect(point3.getDistanceTo(point4)).toBe(2);
-    expect(point4.getDistanceTo(point3)).toBe(2);
+    expect(point3.distanceTo(point4)).toBe(2);
+    expect(point4.distanceTo(point3)).toBe(2);
 
-    expect(point4.getDistanceTo(point1)).toBe(3);
-    expect(point1.getDistanceTo(point4)).toBe(3);
+    expect(point4.distanceTo(point1)).toBe(3);
+    expect(point1.distanceTo(point4)).toBe(3);
   });
 
   it('distance along square', function() {
@@ -95,14 +95,14 @@ describe('Point', function() {
     let point2 = new Point(5, 5);
     let point3 = new Point(7, 7);
 
-    expect(point1.getDistanceTo(point2)).toBeCloseTo(Math.sqrt(50), 4);
-    expect(point2.getDistanceTo(point1)).toBeCloseTo(Math.sqrt(50), 4);
+    expect(point1.distanceTo(point2)).toBeCloseTo(Math.sqrt(50), 4);
+    expect(point2.distanceTo(point1)).toBeCloseTo(Math.sqrt(50), 4);
 
-    expect(point2.getDistanceTo(point3)).toBeCloseTo(Math.sqrt(8), 4);
-    expect(point3.getDistanceTo(point2)).toBeCloseTo(Math.sqrt(8), 4);
+    expect(point2.distanceTo(point3)).toBeCloseTo(Math.sqrt(8), 4);
+    expect(point3.distanceTo(point2)).toBeCloseTo(Math.sqrt(8), 4);
 
-    expect(point1.getDistanceTo(point3)).toBeCloseTo(Math.sqrt(98), 4);
-    expect(point3.getDistanceTo(point1)).toBeCloseTo(Math.sqrt(98), 4);
+    expect(point1.distanceTo(point3)).toBeCloseTo(Math.sqrt(98), 4);
+    expect(point3.distanceTo(point1)).toBeCloseTo(Math.sqrt(98), 4);
   });
 
   it('distance along axis', function() {
@@ -111,17 +111,17 @@ describe('Point', function() {
     let point3 = new Point(3, 2);
     let point4 = new Point(3, 0);
 
-    expect(point1.getDistanceSquaredTo(point2)).toBe(4);
-    expect(point2.getDistanceSquaredTo(point1)).toBe(4);
+    expect(point1.distanceSquaredTo(point2)).toBe(4);
+    expect(point2.distanceSquaredTo(point1)).toBe(4);
 
-    expect(point2.getDistanceSquaredTo(point3)).toBe(9);
-    expect(point3.getDistanceSquaredTo(point2)).toBe(9);
+    expect(point2.distanceSquaredTo(point3)).toBe(9);
+    expect(point3.distanceSquaredTo(point2)).toBe(9);
 
-    expect(point3.getDistanceSquaredTo(point4)).toBe(4);
-    expect(point4.getDistanceSquaredTo(point3)).toBe(4);
+    expect(point3.distanceSquaredTo(point4)).toBe(4);
+    expect(point4.distanceSquaredTo(point3)).toBe(4);
 
-    expect(point4.getDistanceSquaredTo(point1)).toBe(9);
-    expect(point1.getDistanceSquaredTo(point4)).toBe(9);
+    expect(point4.distanceSquaredTo(point1)).toBe(9);
+    expect(point1.distanceSquaredTo(point4)).toBe(9);
   });
 
   it('distance squared along square', function() {
@@ -129,14 +129,14 @@ describe('Point', function() {
     let point2 = new Point(5, 5);
     let point3 = new Point(7, 7);
 
-    expect(point1.getDistanceSquaredTo(point2)).toBeCloseTo(50, 4);
-    expect(point2.getDistanceSquaredTo(point1)).toBeCloseTo(50, 4);
+    expect(point1.distanceSquaredTo(point2)).toBeCloseTo(50, 4);
+    expect(point2.distanceSquaredTo(point1)).toBeCloseTo(50, 4);
 
-    expect(point2.getDistanceSquaredTo(point3)).toBeCloseTo(8, 4);
-    expect(point3.getDistanceSquaredTo(point2)).toBeCloseTo(8, 4);
+    expect(point2.distanceSquaredTo(point3)).toBeCloseTo(8, 4);
+    expect(point3.distanceSquaredTo(point2)).toBeCloseTo(8, 4);
 
-    expect(point1.getDistanceSquaredTo(point3)).toBeCloseTo(98, 4);
-    expect(point3.getDistanceSquaredTo(point1)).toBeCloseTo(98, 4);
+    expect(point1.distanceSquaredTo(point3)).toBeCloseTo(98, 4);
+    expect(point3.distanceSquaredTo(point1)).toBeCloseTo(98, 4);
   });
 
   // xit('distance to axis aligned line...', function() {

@@ -32,7 +32,7 @@ class Circle {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
     let distanceSquared =
-        this._center.getDistanceSquaredToAxisAlignedLine(axisAlignedLine);
+        this._center.distanceSquaredToAxisAlignedLine(axisAlignedLine);
     let collides = distanceSquared < this.getRadiusSquared();
     if (collides) {
       return true;
@@ -44,7 +44,7 @@ class Circle {
   collidesWithCircle(circle) {
     let combinedRadius = this._radius + circle._radius;
     let combinedRadiusSquared = combinedRadius * combinedRadius;
-    return this._center.getDistanceSquaredTo(circle._center) <
+    return this._center.distanceSquaredTo(circle._center) <
       combinedRadiusSquared;
   }
 

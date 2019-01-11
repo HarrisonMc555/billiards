@@ -22,11 +22,11 @@ class Point {
     return new Point(this.x, this.y);
   }
 
-  getDistanceTo(point) {
+  distanceTo(point) {
     return this.vectorTo(point).magnitude();
   }
 
-  getDistanceSquaredTo(point) {
+  distanceSquaredTo(point) {
     return this.vectorTo(point).magnitudeSquared();
   }
 
@@ -46,7 +46,7 @@ class Point {
     this._vector = new Vector(x, y);
   }
 
-  getDistanceSquaredToAxisAlignedLine(axisAlignedLine) {
+  distanceSquaredToAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
     let linePoint;
@@ -57,7 +57,7 @@ class Point {
     } else {
       throw 'Invalid axis direction';
     }
-    return this.getDistanceSquaredTo(linePoint);
+    return this.distanceSquaredTo(linePoint);
   }
 
   createPointOffsetBy(dx, dy) {

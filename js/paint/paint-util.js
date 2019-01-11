@@ -15,7 +15,7 @@ const ARROW_HEAD_WIDTH = 10;
 function paintArrow(ctx, start, end) {
   let dx = end.x - start.x;
   let dy = end.y - start.y;
-  let length = start.getDistanceTo(end);
+  let length = start.distanceTo(end);
   // let width = length * ARROW_LINE_WIDTH_AS_FRACTION_OF_LENGTH;
   let width = ARROW_LINE_WIDTH;
 
