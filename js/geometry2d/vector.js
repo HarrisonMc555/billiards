@@ -29,8 +29,12 @@ class Vector {
     return this._x*this._x + this._y*this._y;
   }
 
-  getDirection() {
+  getAngle() {
     return MathUtil.atan2positive(this._y, this._x);
+  }
+
+  getDirection() {
+    return this.getAngle();
   }
 
   addVector(vector) {
