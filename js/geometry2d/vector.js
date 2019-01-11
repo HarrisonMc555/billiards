@@ -61,6 +61,10 @@ class Vector {
     return this.negateX().negateY();
   }
 
+  negated() {
+    return this.clone().negate();
+  }
+
   negateX() {
     this._x *= -1;
     return this;
@@ -71,18 +75,22 @@ class Vector {
     return this;
   }
 
-  negated() {
-    return this.clone().negate();
-  }
-
   scale(scalarFactor) {
-    this._x *= scalarFactor;
-    this._y *= scalarFactor;
-    return this;
+    return this.scaleX(scalarFactor).scaleY(scalarFactor);
   }
 
   scaled(scalarFactor) {
     return this.clone().scale(scalarFactor);
+  }
+
+  scaleX(scalarFactor) {
+    this._x *= scalarFactor;
+    return this;
+  }
+
+  scaleY(scalarFactor) {
+    this._y *= scalarFactor;
+    return this;
   }
 
   unitVector() {
