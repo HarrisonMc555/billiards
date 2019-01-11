@@ -15,10 +15,18 @@ const MIN_SPEED = 0.1;
 class Board {
 
   constructor(table, billiardBalls) {
-    this.table = table;
-    this.billiardBalls = billiardBalls;
+    this._table = table;
+    this._billiardBalls = billiardBalls;
     this._anyStillMoving = true;
     this._debug = {};
+  }
+
+  get table() {
+    return this._table;
+  }
+
+  get billiardBalls() {
+    return this._billiardBalls;
   }
 
   getAllPhysicalBalls() {
