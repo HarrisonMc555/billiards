@@ -7,8 +7,16 @@ const AxisDirection = require('../geometry2d/axis-direction');
 class Table {
 
   constructor(bounds, holes) {
-    this.bounds = bounds;
-    this.holes = holes;
+    this._bounds = bounds;
+    this._holes = holes;
+  }
+
+  get bounds() {
+    return this._bounds;
+  }
+
+  get holes() {
+    return this._holes;
   }
 
   walls() {
