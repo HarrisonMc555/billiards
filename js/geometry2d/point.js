@@ -1,13 +1,21 @@
 'use strict';
 
+const Vector = require('./vector');
 const AxisDirection = require('./axis-direction');
 const MathUtil = require('../util/math-util');
 
 class Point {
 
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this._vector = new Vector(x, y);
+  }
+
+  get x() {
+    return this._vector.x;
+  }
+
+  get y() {
+    return this._vector.y;
   }
 
   getDistanceTo(point) {
@@ -39,13 +47,11 @@ class Point {
   }
 
   move(dx, dy) {
-    this.x += dx;
-    this.y += dy;
+    this._vector = new Vector(this.x + dx, this.y + dy);
   }
 
   moveTo(x, y) {
-    this.x = x;
-    this.y = y;
+    this._vector = new Vector(x, y);
   }
 
   createPointOffsetBy(dx, dy) {
@@ -59,8 +65,9 @@ class Point {
   }
 
   round(roundingFactor) {
-    this.x = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
-    this.y = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
+    let newX = MathUtil.roundToNearestMultiple(this.x, roundingFactor);
+    let newY = MathUtil.roundToNearestMultiple(this.y, roundingFactor);
+    this._vector = new Vector(newX, newY);
   }
 
   clone() {
