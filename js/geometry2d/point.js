@@ -23,17 +23,11 @@ class Point {
   }
 
   getDistanceTo(point) {
-    return Math.sqrt(this.getDistanceSquaredTo(point));
+    return this.vectorTo(point).magnitude();
   }
 
   getDistanceSquaredTo(point) {
-    let x2 = point.x;
-    let y2 = point.y;
-    let dx = Math.abs(x2 - this.x);
-    let dy = Math.abs(y2 - this.y);
-    let xsquared = dx * dx;
-    let ysquared = dy * dy;
-    return xsquared + ysquared;
+    return this.vectorTo(point).magnitudeSquared();
   }
 
   getDistanceSquaredToAxisAlignedLine(axisAlignedLine) {
