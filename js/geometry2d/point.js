@@ -50,6 +50,14 @@ class Point {
     return this.getDistanceSquaredTo(linePoint);
   }
 
+  vectorTo(point) {
+    return point._vector.minusVector(this._vector);
+  }
+
+  angleTo(point) {
+    return this.vectorTo(point).getAngle();
+  }
+
   move(dx, dy) {
     this._vector = new Vector(this.x + dx, this.y + dy);
   }
@@ -60,12 +68,6 @@ class Point {
 
   createPointOffsetBy(dx, dy) {
     return new Point(this.x + dx, this.y + dy);
-  }
-
-  angleTo(point) {
-    let dx = point.x - this.x;
-    let dy = point.y - this.y;
-    return MathUtil.atan2positive(dy, dx);
   }
 
   round(roundingFactor) {
