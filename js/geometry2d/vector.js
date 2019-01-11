@@ -93,7 +93,7 @@ class Vector {
     return this;
   }
 
-  unitVector() {
+  normalized() {
     let magnitude = this.magnitude();
     return new Vector(this._x / magnitude, this._y / magnitude);
   }
@@ -103,9 +103,9 @@ class Vector {
   }
 
   dottedInto(vector) {
-    let unitVector = vector.unitVector();
-    let magnitude = Vector.dotProduct(this, unitVector);
-    return unitVector.scale(magnitude);
+    let normalized = vector.normalized();
+    let magnitude = Vector.dotProduct(this, normalized);
+    return normalized.scale(magnitude);
   }
 
   static zero() {
