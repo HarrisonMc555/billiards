@@ -30,6 +30,22 @@ class Point {
     return this.vectorTo(point).magnitudeSquared();
   }
 
+  angleTo(point) {
+    return this.vectorTo(point).angle();
+  }
+
+  vectorTo(point) {
+    return point._vector.minusVector(this._vector);
+  }
+
+  move(dx, dy) {
+    this._vector.addVector(new Vector(dx, dy));
+  }
+
+  moveTo(x, y) {
+    this._vector = new Vector(x, y);
+  }
+
   getDistanceSquaredToAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
@@ -42,22 +58,6 @@ class Point {
       throw 'Invalid axis direction';
     }
     return this.getDistanceSquaredTo(linePoint);
-  }
-
-  vectorTo(point) {
-    return point._vector.minusVector(this._vector);
-  }
-
-  angleTo(point) {
-    return this.vectorTo(point).angle();
-  }
-
-  move(dx, dy) {
-    this._vector = new Vector(this.x + dx, this.y + dy);
-  }
-
-  moveTo(x, y) {
-    this._vector = new Vector(x, y);
   }
 
   createPointOffsetBy(dx, dy) {
