@@ -3,7 +3,11 @@
 class CueBall {
 
   constructor(physicalBall) {
-    this.physicalBall = physicalBall;
+    this._physicalBall = physicalBall;
+  }
+
+  get physicalBall() {
+    return this._physicalBall;
   }
 
   get circle() {
