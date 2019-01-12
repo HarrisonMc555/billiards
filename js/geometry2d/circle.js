@@ -16,16 +16,16 @@ class Circle {
   }
 
   clone() {
-    let center = this._center.clone();
-    return new Circle(center, this._radius);
+    let center = this.center.clone();
+    return new Circle(center, this.radius);
   }
 
   translate(dx, dy) {
-    this._center.translate(dx, dy);
+    this.center.translate(dx, dy);
   }
 
   move(x, y) {
-    this._center.move(x, y);
+    this.center.move(x, y);
   }
 
   collidesWithX(x) {
@@ -40,7 +40,7 @@ class Circle {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
     let distanceSquared =
-        this._center.distanceSquaredToAxisAlignedLine(axisAlignedLine);
+        this.center.distanceSquaredToAxisAlignedLine(axisAlignedLine);
     let collides = distanceSquared < this.getRadiusSquared();
     if (collides) {
       return true;
@@ -50,14 +50,14 @@ class Circle {
   }
 
   collidesWithCircle(circle) {
-    let combinedRadius = this._radius + circle._radius;
+    let combinedRadius = this.radius + circle._radius;
     let combinedRadiusSquared = combinedRadius * combinedRadius;
-    return this._center.distanceSquaredTo(circle._center) <
+    return this.center.distanceSquaredTo(circle._center) <
       combinedRadiusSquared;
   }
 
   getRadiusSquared() {
-    return this._radius * this._radius;
+    return this.radius * this.radius;
   }
 
 }
