@@ -28,6 +28,14 @@ class Circle {
     this._center.move(x, y);
   }
 
+  collidesWithX(x) {
+    return this.center.distanceX(x) < this.getRadiusSquared();
+  }
+
+  collidesWithY(y) {
+    return this.center.distanceY(y) < this.getRadiusSquared();
+  }
+
   collidesWithAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.

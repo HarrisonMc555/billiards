@@ -52,6 +52,24 @@ class Point {
     return this;
   }
 
+  distanceToX(x) {
+    return Math.abs(this.x - x);
+  }
+
+  distanceToXSquared(x) {
+    let distance = this.distanceToX(x);
+    return distance * distance;
+  }
+
+  distanceToY(y) {
+    return Math.abs(this.y - y);
+  }
+
+  distanceToYSquared(y) {
+    let distance = this.distanceToY(y);
+    return distance * distance;
+  }
+
   distanceSquaredToAxisAlignedLine(axisAlignedLine) {
     // Assume that we can't go past the walls, so we must be within the
     // dimensions of the wall.
