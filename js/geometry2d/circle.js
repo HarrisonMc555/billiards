@@ -29,11 +29,11 @@ class Circle {
   }
 
   collidesWithX(x) {
-    return this.center.distanceX(x) < this.getRadiusSquared();
+    return this.center.distanceX(x) < this.radiusSquared();
   }
 
   collidesWithY(y) {
-    return this.center.distanceY(y) < this.getRadiusSquared();
+    return this.center.distanceY(y) < this.radiusSquared();
   }
 
   collidesWithAxisAlignedLine(axisAlignedLine) {
@@ -41,7 +41,7 @@ class Circle {
     // dimensions of the wall.
     let distanceSquared =
         this.center.distanceSquaredToAxisAlignedLine(axisAlignedLine);
-    let collides = distanceSquared < this.getRadiusSquared();
+    let collides = distanceSquared < this.radiusSquared();
     if (collides) {
       return true;
     } else {
@@ -56,7 +56,7 @@ class Circle {
       combinedRadiusSquared;
   }
 
-  getRadiusSquared() {
+  radiusSquared() {
     return this.radius * this.radius;
   }
 
