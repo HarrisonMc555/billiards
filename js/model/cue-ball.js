@@ -2,16 +2,16 @@
 
 class CueBall {
 
-  constructor(physicalBall) {
-    this._physicalBall = physicalBall;
+  constructor(ball) {
+    this._ball = ball;
   }
 
-  get physicalBall() {
-    return this._physicalBall;
+  get ball() {
+    return this._ball;
   }
 
   get circle() {
-    return this.physicalBall.circle;
+    return this.ball.circle;
   }
 
   get center() {

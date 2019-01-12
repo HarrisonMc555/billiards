@@ -1,9 +1,9 @@
 'use strict';
 
 /* Exports */
-const PhysicalBallPaintUtils = {
-  'paintHighlights': paintPhysicalBallHighlights,
-  'paintShadow': paintPhysicalBallShadow,
+const BallPaintUtils = {
+  'paintHighlights': paintBallHighlights,
+  'paintShadow': paintBallShadow,
 };
 
 
@@ -33,15 +33,15 @@ const SHADOW_COLOR_STOPS = [
 
 
 /* Functions */
-function paintPhysicalBallHighlights(ctx, physicalBall) {
-  let innerCircleXOffset = physicalBall.radius * HIGHLIGHT_OFFSET_X_FRACTION;
-  let innerCircleYOffset = physicalBall.radius * HIGHLIGHT_OFFSET_Y_FRACTION;
-  let innerCircleCenter = new Point(physicalBall.center.x + innerCircleXOffset,
-                                    physicalBall.center.y + innerCircleYOffset);
-  let innerCircleRadius = physicalBall.radius * HIGHLIGHT_RADIUS_FRACTION;
+function paintBallHighlights(ctx, ball) {
+  let innerCircleXOffset = ball.radius * HIGHLIGHT_OFFSET_X_FRACTION;
+  let innerCircleYOffset = ball.radius * HIGHLIGHT_OFFSET_Y_FRACTION;
+  let innerCircleCenter = new Point(ball.center.x + innerCircleXOffset,
+                                    ball.center.y + innerCircleYOffset);
+  let innerCircleRadius = ball.radius * HIGHLIGHT_RADIUS_FRACTION;
   let innerCircle = new Circle(innerCircleCenter, innerCircleRadius);
 
-  let outerCircle = physicalBall.circle;
+  let outerCircle = ball.circle;
   
   let gradient = ctx.createRadialGradient(
     innerCircle.center.x, innerCircle.center.y, innerCircle.radius,
@@ -53,15 +53,15 @@ function paintPhysicalBallHighlights(ctx, physicalBall) {
   });
 
   // ctx.fillStyle = gradient;
-  paintCircle(ctx, physicalBall.circle, gradient);
+  paintCircle(ctx, ball.circle, gradient);
 }
 
-function paintPhysicalBallShadow(ctx, physicalBall) {
-  let shadowXOffset = physicalBall.radius * SHADOW_OFFSET_X_FRACTION;
-  let shadowYOffset = physicalBall.radius * SHADOW_OFFSET_Y_FRACTION;
-  let shadowCenter = new Point(physicalBall.center.x + shadowXOffset,
-                               physicalBall.center.y + shadowYOffset);
-  let shadowRadius = physicalBall.radius * SHADOW_RADIUS_FRACTION;
+function paintBallShadow(ctx, ball) {
+  let shadowXOffset = ball.radius * SHADOW_OFFSET_X_FRACTION;
+  let shadowYOffset = ball.radius * SHADOW_OFFSET_Y_FRACTION;
+  let shadowCenter = new Point(ball.center.x + shadowXOffset,
+                               ball.center.y + shadowYOffset);
+  let shadowRadius = ball.radius * SHADOW_RADIUS_FRACTION;
   let circle = new Circle(shadowCenter, shadowRadius);
 
   let gradient = ctx.createRadialGradient(
@@ -77,4 +77,4 @@ function paintPhysicalBallShadow(ctx, physicalBall) {
   paintCircle(ctx, circle, gradient);
 }
 
-module.exports = PhysicalBallPaintUtils;
+module.exports = BallPaintUtils;

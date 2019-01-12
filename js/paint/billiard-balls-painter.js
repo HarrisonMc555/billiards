@@ -1,6 +1,6 @@
 'use strict';
 
-const PhysicalBallPaintUtils = require('./physical-ball-paint-utils');
+const BallPaintUtils = require('./ball-paint-utils');
 const BilliardBallsPaintUtils = require('./billiard-balls-paint-utils');
 const PaintUtil = require('./paint-util');
 
@@ -17,11 +17,11 @@ class BilliardBallsPainter {
   }
 
   paintShadows(ctx, billiardBalls) {
-    PhysicalBallPaintUtils.paintShadow(ctx,
-                                       billiardBalls.cueBall.physicalBall);
+    BallPaintUtils.paintShadow(ctx,
+                                       billiardBalls.cueBall.ball);
     billiardBalls.normalBilliardBalls.forEach(
-      normalBilliardBall => PhysicalBallPaintUtils.paintShadow(
-        ctx, normalBilliardBall.physicalBall));
+      normalBilliardBall => BallPaintUtils.paintShadow(
+        ctx, normalBilliardBall.ball));
   }
 
   paintActualBilliardBalls(ctx, billiardBalls) {
@@ -34,9 +34,9 @@ class BilliardBallsPainter {
 
   paintBilliardBall(ctx, billiardBall, paintFunction) {
     paintFunction(ctx, billiardBall);
-    PhysicalBallPaintUtils.paintHighlights(ctx, billiardBall.physicalBall);
-    if (billiardBall.physicalBall.velocity.getMagnitudeSquared() > 1) {
-      PaintUtil.paintVelocity(ctx, billiardBall.physicalBall);
+    BallPaintUtils.paintHighlights(ctx, billiardBall.ball);
+    if (billiardBall.ball.velocity.getMagnitudeSquared() > 1) {
+      PaintUtil.paintVelocity(ctx, billiardBall.ball);
     }
   }
 

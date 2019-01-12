@@ -3,7 +3,7 @@ const Circle = require('../model/circle');
 const Rectangle = require('../model/rectangle');
 const AxisAlignedLine = require('../model/axis-aligned-line');
 const Velocity = require('../model/velocity');
-const PhysicalBall = require('../mode../physics2d/physical-ball');
+const Ball = require('../mode../physics2d/ball');
 
 const LEEWAY = 0.0001;
 
@@ -49,17 +49,17 @@ function velocitiesEqual(velocity1, velocity2) {
 
 
 
-const physicalBallEquality = function(first, second) {
-  if (first instanceof PhysicalBall && second instanceof PhysicalBall) {
-    return physicalBallsEqual(first, second);
+const ballEquality = function(first, second) {
+  if (first instanceof Ball && second instanceof Ball) {
+    return ballsEqual(first, second);
   }
   return undefined;
 };
 
-function physicalBallsEqual(physicalBall1, physicalBall2) {
-  return circlesEqual(physicalBall1.circle, physicalBall2.circle) &&
-    floatingEqual(physicalBall1.mass, physicalBall2.mass) &&
-    velocitiesEqual(physicalBall1.velocity, physicalBall2.velocity);
+function ballsEqual(ball1, ball2) {
+  return circlesEqual(ball1.circle, ball2.circle) &&
+    floatingEqual(ball1.mass, ball2.mass) &&
+    velocitiesEqual(ball1.velocity, ball2.velocity);
 }
 
 
@@ -97,7 +97,7 @@ function addCustomEqualityTesters() {
   jasmine.addCustomEqualityTester(pointEquality);
   jasmine.addCustomEqualityTester(circleEquality);
   jasmine.addCustomEqualityTester(velocityEquality);
-  jasmine.addCustomEqualityTester(physicalBallEquality);
+  jasmine.addCustomEqualityTester(ballEquality);
   jasmine.addCustomEqualityTester(rectangleEquality);
   jasmine.addCustomEqualityTester(axisAlignedLineEquality);
 }
@@ -113,7 +113,7 @@ const Util = Object.freeze({
   pointEquality: pointEquality,
   circleEquality: circleEquality,
   velocityEquality: velocityEquality,
-  physicalBallEquality: physicalBallEquality,
+  ballEquality: ballEquality,
   rectangleEquality: rectangleEquality,
   axisAlignedLineEquality: axisAlignedLineEquality,
 });

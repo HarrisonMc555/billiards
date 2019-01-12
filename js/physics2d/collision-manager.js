@@ -5,15 +5,15 @@ const SetUtil = require('../util/set-util');
 
 class CollisionManager {
 
-  constructor(walls, physicalBalls) {
+  constructor(walls, balls) {
     this.walls = walls;
-    this.physicalBalls = physicalBalls;
+    this.balls = balls;
   }
 
   doAllCollisions() {
     let allCollidedBalls = [];
     let recentlyCollidedBalls = new Set();
-    this.updateCollidedBalls(recentlyCollidedBalls, this.physicalBalls);
+    this.updateCollidedBalls(recentlyCollidedBalls, this.balls);
     this.updateAllCollidedBalls(recentlyCollidedBalls, allCollidedBalls);
     while (!SetUtil.empty(recentlyCollidedBalls)) {
       let prevCollidedBalls = recentlyCollidedBalls;
@@ -26,10 +26,10 @@ class CollisionManager {
     return count;
   }
 
-  updateCollidedBalls(recentlyCollidedBalls, physicalBalls) {
-    let ballsHitWalls = this.ballsHitWalls(this.physicalBalls);
+  updateCollidedBalls(recentlyCollidedBalls, balls) {
+    let ballsHitWalls = this.ballsHitWalls(this.balls);
     SetUtil.extend(recentlyCollidedBalls, ballsHitWalls);
-    let ballsHitBalls = this.ballsHitBalls(this.physicalBalls);
+    let ballsHitBalls = this.ballsHitBalls(this.balls);
     SetUtil.extend(recentlyCollidedBalls, ballsHitBalls);
   }
 
@@ -37,43 +37,43 @@ class CollisionManager {
     allCollidedBalls.push(...recentlyCollidedBalls);
   }
 
-  ballsHitWalls(physicalBalls) {
-    return physicalBalls.filter(physicalBall =>
-                                this.ballHitWalls(physicalBall));
+  ballsHitWalls(balls) {
+    return balls.filter(ball =>
+                                this.ballHitWalls(ball));
   }
 
-  ballHitWalls(physicalBall) {
+  ballHitWalls(ball) {
     let wallsHit = this.walls.filter(wall =>
-                                     this.ballHitWall(physicalBall, wall));
+                                     this.ballHitWall(ball, wall));
     return !ArrayUtil.empty(wallsHit);
   }
 
-  ballHitWall(physicalBall, wall) {
-    return physicalBall.maybeCollideWithWall(wall);
+  ballHitWall(ball, wall) {
+    return ball.maybeCollideWithWall(wall);
   }
 
-  ballsHitBalls(physicalBalls) {
+  ballsHitBalls(balls) {
     let recentlyCollidedBalls = new Set();
-    physicalBalls.forEach(
-      (physicalBall, index, array) =>
+    balls.forEach(
+      (ball, index, array) =>
         SetUtil.extend(recentlyCollidedBalls,
-                       this.ballHitBalls(physicalBall, array.slice(index + 1)))
+                       this.ballHitBalls(ball, array.slice(index + 1)))
     );
     return recentlyCollidedBalls;
   }
 
-  ballHitBalls(physicalBall, otherPhysicalBalls) {
+  ballHitBalls(ball, otherBalls) {
     let recentlyCollidedBalls = new Set();
-    otherPhysicalBalls.forEach(otherPhysicalBall => {
-      if (this.ballHitBall(physicalBall, otherPhysicalBall)) {
-        SetUtil.extend(recentlyCollidedBalls, [physicalBall, otherPhysicalBall]);
+    otherBalls.forEach(otherBall => {
+      if (this.ballHitBall(ball, otherBall)) {
+        SetUtil.extend(recentlyCollidedBalls, [ball, otherBall]);
       }
     });
     return recentlyCollidedBalls;
   }
 
-  ballHitBall(physicalBall1, physicalBall2) {
-    return physicalBall1.maybeCollideWithPhysicalBall(physicalBall2);
+  ballHitBall(ball1, ball2) {
+    return ball1.maybeCollideWithBall(ball2);
   }
 
 }

@@ -17,11 +17,11 @@ class BilliardBalls {
     return this._normalBilliardBalls;
   }
 
-  getAllPhysicalBalls() {
+  getAllBalls() {
     let balls = [];
-    balls.push(this.cueBall.physicalBall);
+    balls.push(this.cueBall.ball);
     this.normalBilliardBalls.forEach(
-      normalBilliardBall => balls.push(normalBilliardBall.physicalBall));
+      normalBilliardBall => balls.push(normalBilliardBall.ball));
     return balls;
   }
 

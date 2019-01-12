@@ -6,11 +6,11 @@ const Rectangle = require('../model/rectangle');
 const AxisAlignedLine = require('../model/axis-aligned-line');
 const AxisDirection = require('../model/axis-direction');
 const Velocity = require('../model/velocity');
-const PhysicalBall = require('../mode../physics2d/physical-ball');
+const Ball = require('../mode../physics2d/ball');
 const Util = require('./util');
 const ArrayUtil = require('../util/array-util');
 
-describe('PhysicalBall', function() {
+describe('Ball', function() {
 
   let ball;
   let ball1;
@@ -21,7 +21,7 @@ describe('PhysicalBall', function() {
     ball = defaultBall();
     ball1 = defaultBall();
     ball2 = defaultBall();
-    spyOn(ball1, 'bounceOffPhysicalBall').and.callThrough();
+    spyOn(ball1, 'bounceOffBall').and.callThrough();
   });
 
   it('create', function() {
@@ -167,13 +167,13 @@ describe('PhysicalBall', function() {
        expect(ball1.velocity.x).toBe(1);
        expect(ball1.getNextCircle()).toEqual(new Circle(new Point(1, 0), 1));
        expect(ball2.getNextCircle()).toEqual(new Circle(new Point(2, 0), 1));
-       expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
-       expect(ball2.willCollideWithPhysicalBall(ball1)).toBe(true);
-       expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.willCollideWithBall(ball2)).toBe(true);
+       expect(ball2.willCollideWithBall(ball1)).toBe(true);
+       expect(ball1.maybeCollideWithBall(ball2)).toBe(true);
        expect(ball1.velocity).toEqual(new Velocity(0, 0));
        expect(ball2.velocity).toEqual(new Velocity(1, 0));
-       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
-       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledTimes(1);
+       expect(ball1.bounceOffBall).toHaveBeenCalledWith(ball2);
+       expect(ball1.bounceOffBall).toHaveBeenCalledTimes(1);
 
        let afterKineticEnergy = getTotalKineticEnergy([ball1, ball2]);
        let afterMomentum = getTotalMomentumVector([ball1, ball2]);
@@ -197,12 +197,12 @@ describe('PhysicalBall', function() {
        let previousKineticEnergy = getTotalKineticEnergy([ball1, ball2]);
        let previousMomentum = getTotalMomentumVector([ball1, ball2]);
 
-       expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
-       expect(ball2.willCollideWithPhysicalBall(ball1)).toBe(true);
-       expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.willCollideWithBall(ball2)).toBe(true);
+       expect(ball2.willCollideWithBall(ball1)).toBe(true);
+       expect(ball1.maybeCollideWithBall(ball2)).toBe(true);
        expect(ball1.velocity).toEqual(new Velocity(-1, 0));
        expect(ball2.velocity).toEqual(new Velocity(1, 0));
-       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
+       expect(ball1.bounceOffBall).toHaveBeenCalledWith(ball2);
 
        let afterKineticEnergy = getTotalKineticEnergy([ball1, ball2]);
        let afterMomentum = getTotalMomentumVector([ball1, ball2]);
@@ -226,9 +226,9 @@ describe('PhysicalBall', function() {
        let previousKineticEnergy = getTotalKineticEnergy([ball1, ball2]);
        let previousMomentum = getTotalMomentumVector([ball1, ball2]);
 
-       expect(ball1.willCollideWithPhysicalBall(ball2)).toBe(true);
-       expect(ball2.willCollideWithPhysicalBall(ball1)).toBe(true);
-       expect(ball1.maybeCollideWithPhysicalBall(ball2)).toBe(true);
+       expect(ball1.willCollideWithBall(ball2)).toBe(true);
+       expect(ball2.willCollideWithBall(ball1)).toBe(true);
+       expect(ball1.maybeCollideWithBall(ball2)).toBe(true);
 
        expect(ball1.velocity.x).toBeLessThan(1);
        expect(ball1.velocity.x).toBeGreaterThan(0);
@@ -241,7 +241,7 @@ describe('PhysicalBall', function() {
        expect(ball2.velocity.y).toBeGreaterThan(0);
        expect(ball1.velocity.y).toBeCloseTo(- ball2.velocity.y, 3);
 
-       expect(ball1.bounceOffPhysicalBall).toHaveBeenCalledWith(ball2);
+       expect(ball1.bounceOffBall).toHaveBeenCalledWith(ball2);
 
        let afterKineticEnergy = getTotalKineticEnergy([ball1, ball2]);
        let afterMomentum = getTotalMomentumVector([ball1, ball2]);
@@ -257,7 +257,7 @@ function defaultBall() {
   let circle = defaultCircle();
   let mass = defaultMass();
   let velocity = defaultVelocity();
-  return new PhysicalBall(circle, mass, velocity);
+  return new Ball(circle, mass, velocity);
 }
 
 function defaultCircle() {

@@ -6,7 +6,7 @@ const Rectangle = require('../geometry2d/rectangle');
 const Velocity = require('../physics2d/velocity');
 const Hole = require('./hole');
 const HoleDirection = require('./hole-direction');
-const PhysicalBall = require('../physics2d/physical-ball');
+const Ball = require('../physics2d/ball');
 const CueBall = require('./cue-ball');
 const NormalBilliardBall = require('./normal-billiard-ball');
 
@@ -112,8 +112,8 @@ class Defaults {
     // let circle = new Circle(center, CUE_BALL_RADIUS);
     let circle = new Circle(center, CUE_BALL_RADIUS * 0.99);
     let velocity = new Velocity(CUE_BALL_VELOCITY_X, CUE_BALL_VELOCITY_Y);
-    let physicalBall = new PhysicalBall(circle, CUE_BALL_MASS, velocity);
-    return new CueBall(physicalBall);
+    let ball = new Ball(circle, CUE_BALL_MASS, velocity);
+    return new CueBall(ball);
   }
 
   static createNormalBilliardBalls() {
@@ -129,9 +129,9 @@ class Defaults {
       //   circle = new Circle(center, CUE_BALL_RADIUS);
       //   velocity = new Velocity(0, -2);
       // }
-      let physicalBall = new PhysicalBall(circle, NORMAL_BILLIARD_BALL_MASS,
+      let ball = new Ball(circle, NORMAL_BILLIARD_BALL_MASS,
                                           velocity);
-      let normal_billiard_ball = new NormalBilliardBall(physicalBall, number);
+      let normal_billiard_ball = new NormalBilliardBall(ball, number);
       return normal_billiard_ball;
     });
   }

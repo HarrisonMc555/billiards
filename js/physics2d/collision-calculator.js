@@ -2,19 +2,19 @@
 
 class CollisionCalculator {
 
-  static performBallWallCollision(physicalBall, wall) {
+  static performBallWallCollision(ball, wall) {
     
   }
 
-  static performBallBallCollision(physicalBall1, physicalBall2) {
+  static performBallBallCollision(ball1, ball2) {
     
   }
 
-  static doBallWallCollide(physicalBall, wall) {
+  static doBallWallCollide(ball, wall) {
     
   }
 
-  static doBallBallCollide(physicalBall1, physicalBall2) {
+  static doBallBallCollide(ball1, ball2) {
     
   }
 

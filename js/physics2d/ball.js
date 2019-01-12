@@ -4,7 +4,7 @@ const Velocity = require('./velocity');
 const AxisDirection = require('../geometry2d/axis-direction');
 const MathUtil = require('../util/math-util');
 
-class PhysicalBall {
+class Ball {
 
   constructor(circle, mass, velocity) {
     this._circle = circle;
@@ -54,42 +54,42 @@ class PhysicalBall {
     }
   }
 
-  maybeCollideWithPhysicalBall(physicalBall) {
-    // console.log('maybeCollideWithPhysicalBall');
+  maybeCollideWithBall(ball) {
+    // console.log('maybeCollideWithBall');
     let thisNextCircle = this.getNextCircle();
-    let otherNextCircle = physicalBall.getNextCircle();
+    let otherNextCircle = ball.getNextCircle();
     if (thisNextCircle.collidesWithCircle(otherNextCircle)) {
-      // console.log('bouncing off ball:', this, physicalBall);
+      // console.log('bouncing off ball:', this, ball);
       // console.log('bouncing off ball:');
-      this.bounceOffPhysicalBall(physicalBall);
+      this.bounceOffBall(ball);
       // console.log('done bouncing off ball...');
       return true;
     }
-    // console.log('NOT bouncing off ball:', this, physicalBall);
+    // console.log('NOT bouncing off ball:', this, ball);
     // console.log('NOT bouncing off ball:');
-    // if (this.collidesWithPhysicalBall(physicalBall)) {
-    //   console.log(this, 'bouncing off', physicalBall);
-    //   this.bounceOffPhysicalBall(physicalBall);
+    // if (this.collidesWithBall(ball)) {
+    //   console.log(this, 'bouncing off', ball);
+    //   this.bounceOffBall(ball);
     //   return true;
     // }
     return false;
   }
 
-  collidesWithPhysicalBall(physicalBall) {
-    return this.circle.collidesWithCircle(physicalBall.circle);
+  collidesWithBall(ball) {
+    return this.circle.collidesWithCircle(ball.circle);
   }
 
-  willCollideWithPhysicalBall(physicalBall) {
+  willCollideWithBall(ball) {
     let thisNextCircle = this.getNextCircle();
-    let otherNextCircle = physicalBall.getNextCircle();
+    let otherNextCircle = ball.getNextCircle();
     return thisNextCircle.collidesWithCircle(otherNextCircle);
   }
 
-  bounceOffPhysicalBall(physicalBall) {
-    // console.log('bounceOffPhysicalBall');
+  bounceOffBall(ball) {
+    // console.log('bounceOffBall');
     /* I have derived this equation. I believe it is correct. */
     let ball1 = this;
-    let ball2 = physicalBall;
+    let ball2 = ball;
     let m1 = ball1.mass;
     let m2 = ball2.mass;
     // let v1i = ball1.velocity.getMagnitude();
@@ -142,11 +142,11 @@ class PhysicalBall {
     // console.log('theta2', theta2);
 
     // console.log('old ball1 velocity:', this.velocity);
-    // console.log('old ball2 velocity:', physicalBall.velocity);
+    // console.log('old ball2 velocity:', ball.velocity);
     this._velocity = new Velocity(v1fx, v1fy);
-    physicalBall._velocity = new Velocity(v2fx, v2fy);
+    ball._velocity = new Velocity(v2fx, v2fy);
     // console.log('new ball1 velocity:', this.velocity);
-    // console.log('new ball2 velocity:', physicalBall.velocity);
+    // console.log('new ball2 velocity:', ball.velocity);
   }
 
   translate() {
@@ -171,4 +171,4 @@ class PhysicalBall {
 
 }
 
-module.exports = PhysicalBall;
+module.exports = Ball;

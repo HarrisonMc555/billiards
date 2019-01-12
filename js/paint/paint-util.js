@@ -48,9 +48,9 @@ function paintArrow(ctx, start, end) {
 }
 
 const VELOCITY_FACTOR = 10;
-function paintVelocity(ctx, physicalBall) {
-  let start = physicalBall.center;
-  let velocity = physicalBall.velocity;
+function paintVelocity(ctx, ball) {
+  let start = ball.center;
+  let velocity = ball.velocity;
   let end = start.translated(velocity.x * VELOCITY_FACTOR,
                                       velocity.y * VELOCITY_FACTOR);
   paintArrow(ctx, start, end);
