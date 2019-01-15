@@ -4,11 +4,13 @@
   "description": "Play billiards in a browser",
   "main": "index.js",
   "scripts": {
+    "build": "browserify js/main.js -o js/bundle.js",
     "test": "jasmine"
   },
   "author": "Harrison McCullough",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^16.2.3",
     "jasmine": "^3.3.1"
   }
 }
